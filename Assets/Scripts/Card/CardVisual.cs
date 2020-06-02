@@ -14,11 +14,6 @@ namespace Card
         [SerializeField] private TextMeshPro valueText = default;
         [SerializeField] private MeshRenderer suiteMeshRenderer = default;
 
-        private void Update()
-        {
-            transform.rotation *= Quaternion.AngleAxis(25 * Time.deltaTime, Vector3.forward);
-        }
-
         public void Set(CardValue value)
         {
             valueText.text = value.Rank.GetStringValue();

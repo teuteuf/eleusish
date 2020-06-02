@@ -9,14 +9,14 @@ namespace Card
         
         private CardVisual _cardVisual;
 
-        private void Start()
+        private void Awake()
         {
             _cardVisual = GetComponent<CardVisual>();
-            SetValue(new CardValue
-            {
-                Rank = CardRank.Ace,
-                Suite = CardSuite.Spades
-            });
+        }
+        
+        private void Update()
+        {
+            transform.rotation *= Quaternion.AngleAxis(25 * Time.deltaTime, Vector3.forward);
         }
 
         public void SetValue(CardValue value)
