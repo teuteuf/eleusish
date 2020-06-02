@@ -12,7 +12,7 @@ namespace Card
         
         private List<CardValue> _remainingCards;
 
-        private void Start()
+        private void Awake()
         {
             ResetRemainingCards();
         }
@@ -23,7 +23,7 @@ namespace Card
             var cardValue = _remainingCards[cardIndex];
             _remainingCards.RemoveAt(cardIndex);
 
-            var card = Instantiate(prefabCard);
+            var card = Instantiate(prefabCard, transform.position, transform.rotation);
             card.SetValue(cardValue);
 
             return card;
