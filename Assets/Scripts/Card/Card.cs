@@ -13,11 +13,6 @@ namespace Card
         {
             _cardVisual = GetComponent<CardVisual>();
         }
-        
-        private void Update()
-        {
-            transform.rotation *= Quaternion.AngleAxis(25 * Time.deltaTime, Vector3.forward);
-        }
 
         public void SetValue(CardValue value)
         {

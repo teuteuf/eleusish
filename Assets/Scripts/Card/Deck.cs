@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,8 +18,15 @@ namespace Card
             ResetRemainingCards();
         }
 
+        [CanBeNull]
         public Card DrawCard()
         {
+            if (_remainingCards.Count == 0)
+            {
+                Debug.LogWarning("Try to draw but no more card!");
+                return null;
+            }
+            
             var cardIndex = Random.Range(0, _remainingCards.Count);
             var cardValue = _remainingCards[cardIndex];
             _remainingCards.RemoveAt(cardIndex);
