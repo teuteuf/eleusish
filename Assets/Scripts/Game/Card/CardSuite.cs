@@ -1,4 +1,4 @@
-namespace Card
+namespace Game.Card
 {
     public enum CardSuite
     {

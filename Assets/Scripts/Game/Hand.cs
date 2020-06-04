@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Card
+namespace Game
 {
     public class Hand : MonoBehaviour
     {
@@ -10,7 +9,7 @@ namespace Card
         
         [SerializeField] private Deck deck = default;
 
-        private List<Card> _cards = new List<Card>();
+        private List<Card.Card> _cards = new List<Card.Card>();
 
         public void AddCard()
         {

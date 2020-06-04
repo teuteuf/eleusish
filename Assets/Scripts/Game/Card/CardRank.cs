@@ -1,6 +1,6 @@
 using System;
 
-namespace Card
+namespace Game.Card
 {
     public enum CardRank
     {
@@ -19,7 +19,7 @@ namespace Card
         King
     }
 
-    static class CardValueMethods
+    internal static class CardValueMethods
     {
         public static string GetStringValue(this CardRank rank)
         {

@@ -1,6 +1,8 @@
-﻿namespace Card
+﻿using System;
+
+namespace Game.Card
 {
-    [System.Serializable]
+    [Serializable]
     public struct CardValue
     {
         public CardRank Rank;

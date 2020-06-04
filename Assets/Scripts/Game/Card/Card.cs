@@ -1,13 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Card
+namespace Game.Card
 {
     public class Card : MonoBehaviour
     {
-        public CardValue Value { get; private set; }
-        
         private CardVisual _cardVisual;
+        public CardValue Value { get; private set; }
 
         private void Awake()
         {

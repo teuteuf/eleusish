@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Card;
 using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Card
+namespace Game
 {
     public class Deck : MonoBehaviour
     {
-        [SerializeField] private Card prefabCard = default;
+        [SerializeField] private Card.Card prefabCard = default;
         
         private List<CardValue> _remainingCards;
 
@@ -19,7 +20,7 @@ namespace Card
         }
 
         [CanBeNull]
-        public Card DrawCard()
+        public Card.Card DrawCard()
         {
             if (_remainingCards.Count == 0)
             {

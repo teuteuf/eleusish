@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Card
+namespace Game.Card
 {
     public class CardVisual : MonoBehaviour
     {
@@ -11,8 +11,8 @@ namespace Card
         [SerializeField] private Material materialHearts = default;
         [SerializeField] private Material materialSpades = default;
 
-        [SerializeField] private TextMeshPro valueText = default;
         [SerializeField] private MeshRenderer suiteMeshRenderer = default;
+        [SerializeField] private TextMeshPro valueText = default;
 
         public void Set(CardValue value)
         {
