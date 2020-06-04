@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Game.Card
+namespace Game.CardComponents
 {
     public class CardVisual : MonoBehaviour
     {

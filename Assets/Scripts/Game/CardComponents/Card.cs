@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Card
+namespace Game.CardComponents
 {
     public class Card : MonoBehaviour
     {

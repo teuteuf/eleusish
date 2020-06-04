@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Card
+namespace Game.CardComponents
 {
     public enum CardRank
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Card;
+using Game.CardComponents;
 using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,7 +10,7 @@ namespace Game
 {
     public class Deck : MonoBehaviour
     {
-        [SerializeField] private Card.Card prefabCard = default;
+        [SerializeField] private Card prefabCard = default;
         
         private List<CardValue> _remainingCards;
 
@@ -20,7 +20,7 @@ namespace Game
         }
 
         [CanBeNull]
-        public Card.Card DrawCard()
+        public Card DrawCard()
         {
             if (_remainingCards.Count == 0)
             {

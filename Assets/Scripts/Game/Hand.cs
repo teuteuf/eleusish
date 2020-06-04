@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Game.CardComponents;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Game
@@ -7,18 +9,11 @@ namespace Game
     {
         [SerializeField] private float spaceBetweenCards = 0.5f;
         
-        [SerializeField] private Deck deck = default;
+        private List<Card> _cards = new List<Card>();
 
-        private List<Card.Card> _cards = new List<Card.Card>();
-
-        public void AddCard()
+        public void AddCard([NotNull] Card card)
         {
-            var card = deck.DrawCard();
-            if (card != null)
-            {
-                _cards.Add(card);
-            }
-
+            _cards.Add(card);
             OrganizeCards();
         }
 
