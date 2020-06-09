@@ -32,7 +32,8 @@ namespace Game
             var cardValue = _remainingCards[cardIndex];
             _remainingCards.RemoveAt(cardIndex);
 
-            var card = Instantiate(prefabCard, transform.position, transform.rotation);
+            var deckTransform = transform;
+            var card = Instantiate(prefabCard, deckTransform.position, deckTransform.rotation);
             card.SetValue(cardValue);
 
             return card;

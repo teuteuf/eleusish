@@ -1,4 +1,6 @@
 using System;
+using Game.CardComponents;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Game
@@ -12,7 +14,7 @@ namespace Game
 
         private void Start()
         {
-            for (int i = 0; i < startHandSize; i++)
+            for (var i = 0; i < startHandSize; i++)
             {
                 DrawCardToHand();
             }
