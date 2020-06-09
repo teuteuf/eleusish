@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeField] private Deck deck = default;
         [SerializeField] private Hand hand = default;
+        [SerializeField] private GuessingLine guessingLine = default;
 
         [SerializeField] private int startHandSize = 3;
 
@@ -18,6 +19,17 @@ namespace Game
             {
                 DrawCardToHand();
             }
+        }
+
+        public void PlayCard(Card card)
+        {
+            if (card.transform.parent != hand.transform)
+            {
+                return;
+            }
+            
+            hand.RemoveCard(card);
+            guessingLine.AddCard(card);
         }
 
         public void DrawCardToHand()

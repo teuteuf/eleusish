@@ -7,10 +7,12 @@ namespace Game
     public class CardSelector : MonoBehaviour
     {
         private Camera _camera;
+        private GameManager _gameManager;
         
         private void Awake()
         {
             _camera = Camera.main;
+            _gameManager = GetComponent<GameManager>();
         }
 
 
@@ -20,7 +22,7 @@ namespace Game
             HandleGameObjectSelection(selectedGameObject);
         }
 
-        private static void HandleGameObjectSelection(GameObject selectedGameObject)
+        private void HandleGameObjectSelection(GameObject selectedGameObject)
         {
             if (!selectedGameObject)
             {
@@ -30,7 +32,7 @@ namespace Game
             var card = selectedGameObject.GetComponentInParent<Card>();
             if (card)
             {
-                Debug.Log($"{card.Value.Suite} {card.Value.Rank}");
+                _gameManager.PlayCard(card);
             }
         }
 

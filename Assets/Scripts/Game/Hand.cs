@@ -13,7 +13,14 @@ namespace Game
 
         public void AddCard([NotNull] Card card)
         {
+            card.transform.parent = transform;
             _cards.Add(card);
+            OrganizeCards();
+        }
+
+        public void RemoveCard([NotNull] Card card)
+        {
+            _cards.Remove(card);
             OrganizeCards();
         }
 
@@ -29,6 +36,7 @@ namespace Game
                     handPosition.y + 0.001f * i,
                     handPosition.z
                 );
+                _cards[i].transform.rotation = transform.rotation;
             }
         }
     }
