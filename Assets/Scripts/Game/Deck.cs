@@ -24,7 +24,6 @@ namespace Game
         {
             if (_remainingCards.Count == 0)
             {
-                Debug.LogWarning("Try to draw but no more card!");
                 return null;
             }
             

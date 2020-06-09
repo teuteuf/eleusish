@@ -30,12 +30,13 @@ namespace Game
             
             hand.RemoveCard(card);
             guessingLine.AddCard(card);
+            DrawCardToHand();
         }
 
         public void DrawCardToHand()
         {
             var card = deck.DrawCard();
-            if (card != null)
+            if (card)
             {
                 hand.AddCard(card);
             }
