@@ -9,7 +9,7 @@ namespace Game
     {
         [SerializeField] private float spaceBetweenCards = 0.5f;
         
-        private List<Card> _cards = new List<Card>();
+        private readonly List<Card> _cards = new List<Card>();
 
         public void AddCard([NotNull] Card card)
         {
@@ -30,13 +30,15 @@ namespace Game
             var width = spaceBetweenCards * (_cards.Count - 1);
             for (var i = 0; i < _cards.Count; i++)
             {
-                _cards[i].transform.position = new Vector3
-                (
-                    handPosition.x - width/2 + spaceBetweenCards * i,
-                    handPosition.y + 0.001f * i,
-                    handPosition.z
+                _cards[i].Move(
+                    new Vector3
+                    (
+                        handPosition.x - width/2 + spaceBetweenCards * i,
+                        handPosition.y + 0.001f * i,
+                        handPosition.z
+                    ),
+                    transform.rotation
                 );
-                _cards[i].transform.rotation = transform.rotation;
             }
         }
     }

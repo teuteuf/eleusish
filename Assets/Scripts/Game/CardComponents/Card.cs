@@ -17,5 +17,12 @@ namespace Game.CardComponents
             Value = value;
             _cardVisual.Set(value);
         }
+
+        public void Move(Vector3 position, Quaternion rotation)
+        {
+            var cardTransform = transform;
+            cardTransform.position = position;
+            cardTransform.rotation = rotation;
+        }
     }
 }
