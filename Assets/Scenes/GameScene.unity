@@ -737,6 +737,7 @@ MonoBehaviour:
   prefabCardSlot: {fileID: 760817114935225423, guid: 38699c22e5027f04d999129978e6e43d,
     type: 3}
   spaceBetweenCardSlots: 0.725
+  horizontalViewportPadding: 0.15
 --- !u!4 &1396643391
 Transform:
   m_ObjectHideFlags: 0
@@ -745,7 +746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396643389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: 0.5}
+  m_LocalPosition: {x: -2.5, y: 0.001, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1930001440}
