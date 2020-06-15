@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741d861511de4a04b092d46bf839d135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spaceBetweenInvalidCards: 0.1
+  spaceBetweenInvalidAndValidCards: 0.95
