@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Game.CardComponents;
 using UnityEngine;
 
-namespace Game.GuessingLineComponents.Rules
+namespace Game.Rules
 {
     public class RuleBlackAndRed : MonoBehaviour
     {

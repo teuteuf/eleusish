@@ -1,6 +1,7 @@
 using System;
 using Game.CardComponents;
 using Game.GuessingLineComponents;
+using Game.Rules;
 using UnityEngine;
 
 namespace Game
@@ -12,6 +13,13 @@ namespace Game
         [SerializeField] private GuessingLine guessingLine = default;
 
         [SerializeField] private int startHandSize = 3;
+        
+        private RuleBlackAndRed _activeRule;
+
+        private void Awake()
+        {
+            _activeRule = GetComponent<RuleBlackAndRed>();
+        }
 
         private void Start()
         {
@@ -29,8 +37,14 @@ namespace Game
             }
             
             hand.RemoveCard(card);
-            guessingLine.AddCard(card);
-            DrawCardToHand();
+
+            var isValidCard = _activeRule.IsValid(guessingLine.GetAllValidCards(), card);
+            guessingLine.AddCard(card, isValidCard);
+
+            if (!isValidCard)
+            {
+                DrawCardToHand();
+            }
         }
 
         public void DrawCardToHand()

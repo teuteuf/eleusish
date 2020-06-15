@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Game.CardComponents;
-using Game.GuessingLineComponents.Rules;
 using UnityEngine;
 
 namespace Game.GuessingLineComponents
@@ -14,11 +13,8 @@ namespace Game.GuessingLineComponents
         private CardSlot _currentCardSlot;
         private List<CardSlot> _filledCardSlots = new List<CardSlot>();
 
-        private RuleBlackAndRed _activeRule;
-
         private void Awake()
         {
-            _activeRule = GetComponent<RuleBlackAndRed>();
 
             if (!_currentCardSlot)
             {
@@ -27,20 +23,20 @@ namespace Game.GuessingLineComponents
             }
         }
 
-        public void AddCard(Card card)
+        public List<Card> GetAllValidCards()
+        {
+            return _filledCardSlots.ConvertAll(cardSlot => cardSlot.ValidCard);
+        }
+
+        public void AddCard(Card card, bool validCard)
         {
             var currentCardSlotTransform = _currentCardSlot.transform;
             var currentCardSlotPosition = currentCardSlotTransform.position;
             var currentCardSlotRotation = currentCardSlotTransform.rotation;
 
-            var isValidCard = _activeRule.IsValid(
-                _filledCardSlots.ConvertAll(cardSlot => cardSlot.ValidCard),
-                card
-            );
+            _currentCardSlot.PlaceCard(card, validCard);
 
-            _currentCardSlot.PlaceCard(card, isValidCard);
-
-            if (isValidCard)
+            if (validCard)
             {
                 _filledCardSlots.Add(_currentCardSlot);
                 _currentCardSlot = Instantiate(

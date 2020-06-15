@@ -715,7 +715,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1396643391}
   - component: {fileID: 1396643390}
-  - component: {fileID: 1396643392}
   m_Layer: 0
   m_Name: GuessingLine
   m_TagString: Untagged
@@ -752,18 +751,6 @@ Transform:
   m_Father: {fileID: 1930001440}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1396643392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396643389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392eab2688864aee93e41ac009bcc24e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1402898973
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,6 +807,7 @@ GameObject:
   - component: {fileID: 1404435666}
   - component: {fileID: 1404435665}
   - component: {fileID: 1404435667}
+  - component: {fileID: 1404435668}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -842,7 +830,7 @@ MonoBehaviour:
   deck: {fileID: 1402898974}
   hand: {fileID: 1715086728}
   guessingLine: {fileID: 1396643390}
-  startHandSize: 3
+  startHandSize: 10
 --- !u!4 &1404435666
 Transform:
   m_ObjectHideFlags: 0
@@ -867,6 +855,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c13fa55bcc64a94f96f63b120844342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1404435668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404435664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392eab2688864aee93e41ac009bcc24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1715086726
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830d61f434824b54ac037c64e9d00022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceBetweenCards: 0.5
+  spaceBetweenCards: 0.4
 --- !u!1 &1930001436
 GameObject:
   m_ObjectHideFlags: 0
