@@ -9,13 +9,16 @@ namespace Game.GuessingLineComponents
         [SerializeField] private CardSlot prefabCardSlot = default;
         
         [SerializeField] private float spaceBetweenCardSlots = 0.5f;
+        [SerializeField] private float horizontalViewportPadding = 0.15f;
 
+        private Camera _camera;
         private CardSlot _currentCardSlot;
-        private List<CardSlot> _filledCardSlots = new List<CardSlot>();
+        private readonly List<CardSlot> _filledCardSlots = new List<CardSlot>();
 
         private void Awake()
         {
-
+            _camera = Camera.main;
+            
             if (!_currentCardSlot)
             {
                 var originTransform = transform;
@@ -38,6 +41,13 @@ namespace Game.GuessingLineComponents
 
             if (validCard)
             {
+                var viewportCardPosition = _camera.WorldToViewportPoint(card.transform.position);
+                if (1 - viewportCardPosition.x < horizontalViewportPadding)
+                {
+                    var cameraTransform = _camera.transform;
+                    cameraTransform.position += Vector3.right * spaceBetweenCardSlots;
+                }
+
                 _filledCardSlots.Add(_currentCardSlot);
                 _currentCardSlot = Instantiate(
                     prefabCardSlot,

@@ -11,7 +11,7 @@ namespace Game.GuessingLineComponents
         
         public Card ValidCard { get; private set; } = default;
         
-        private List<Card> _invalidCards = new List<Card>();
+        private readonly List<Card> _invalidCards = new List<Card>();
 
         public void PlaceCard(Card card, bool respectRule)
         {
