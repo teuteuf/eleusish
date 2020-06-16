@@ -44,6 +44,7 @@ namespace Game
             if (!isValidCard)
             {
                 DrawCardToHand();
+                DrawCardToHand();
             }
         }
 
