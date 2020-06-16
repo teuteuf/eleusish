@@ -11,7 +11,7 @@ namespace Game
     public class Deck : MonoBehaviour
     {
         [SerializeField] private Card prefabCard = default;
-        
+
         private List<CardValue> _remainingCards;
 
         private void Awake()
@@ -26,7 +26,7 @@ namespace Game
             {
                 return null;
             }
-            
+
             var cardIndex = Random.Range(0, _remainingCards.Count);
             var cardValue = _remainingCards[cardIndex];
             _remainingCards.RemoveAt(cardIndex);
@@ -45,11 +45,8 @@ namespace Game
             {
                 foreach (var rank in Enum.GetValues(typeof(CardRank)).Cast<CardRank>())
                 {
-                    _remainingCards.Add(new CardValue
-                    {
-                        Rank = rank,
-                        Suite = suite
-                    });
+                    _remainingCards.Add(new CardValue {Rank = rank, Suite = suite});
+                    _remainingCards.Add(new CardValue {Rank = rank, Suite = suite});
                 }
             }
         }
