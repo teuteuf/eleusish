@@ -47,6 +47,16 @@ namespace Game
             }
         }
 
+        public void DragCard(Card card, Vector3 offset)
+        {
+            if (card.transform.parent != hand.transform)
+            {
+                return;
+            }
+            
+            hand.transform.position += Vector3.right * offset.x;
+        }
+
         public void DrawCardToHand()
         {
             var card = deck.DrawCard();
