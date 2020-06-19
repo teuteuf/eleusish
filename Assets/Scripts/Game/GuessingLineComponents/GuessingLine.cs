@@ -41,13 +41,6 @@ namespace Game.GuessingLineComponents
 
             if (validCard)
             {
-                var viewportCardPosition = _camera.WorldToViewportPoint(card.transform.position);
-                if (1 - viewportCardPosition.x < horizontalViewportPadding)
-                {
-                    var cameraTransform = _camera.transform;
-                    cameraTransform.position += Vector3.right * spaceBetweenCardSlots;
-                }
-
                 _filledCardSlots.Add(_currentCardSlot);
                 _currentCardSlot = Instantiate(
                     prefabCardSlot,
@@ -59,6 +52,12 @@ namespace Game.GuessingLineComponents
                     currentCardSlotRotation,
                     transform
                 );
+                
+                var viewportCardPosition = _camera.WorldToViewportPoint(card.transform.position);
+                if (1 - viewportCardPosition.x < horizontalViewportPadding)
+                {
+                    transform.parent.position -= Vector3.right * spaceBetweenCardSlots;
+                }
             }
         }
     }
