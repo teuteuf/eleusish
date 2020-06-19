@@ -57,8 +57,13 @@ namespace Game
             
             if (card.transform.parent.parent == guessingLine.transform)
             {
-                guessingLine.transform.parent.position += Vector3.right * offset.x;
+                DragPlayground(offset);
             }
+        }
+
+        public void DragTable(Vector3 offset)
+        {
+            DragPlayground(offset);
         }
 
         public void DrawCardToHand()
@@ -68,6 +73,11 @@ namespace Game
             {
                 hand.AddCard(card);
             }
+        }
+
+        private void DragPlayground(Vector3 offset)
+        {
+            guessingLine.transform.parent.position += Vector3.right * offset.x;
         }
     }
 }

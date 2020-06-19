@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Game
 {
-    public class CardSelector : MonoBehaviour
+    public class ObjectSelector : MonoBehaviour
     {
+        private const string TagTable = "Table";
+        
         [SerializeField] private float dragDelay = 0.25f;
 
         private Camera _camera;
@@ -88,11 +90,16 @@ namespace Game
             var currentCursorPos = GetCurrentCursorPosition();
             var cursorWorldPosition = _camera.ScreenToWorldPoint(currentCursorPos) + _draggingOffset;
             var offset = cursorWorldPosition - draggedGameObject.transform.position;
-
+            
             var card = draggedGameObject.GetComponentInParent<Card>();
             if (card)
             {
                 _gameManager.DragCard(card, offset);
+            }
+
+            if (draggedGameObject.CompareTag(TagTable))
+            {
+                _gameManager.DragTable(offset);
             }
         }
 
