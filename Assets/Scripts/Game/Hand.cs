@@ -9,6 +9,7 @@ namespace Game
     public class Hand : MonoBehaviour
     {
         [SerializeField] private float spaceBetweenCards = 0.5f;
+        [SerializeField] private float randomRotationAngle = 1.0f;
         
         private readonly List<Card> _cards = new List<Card>();
 
@@ -40,9 +41,18 @@ namespace Game
                         handPosition.y + 0.001f * i,
                         handPosition.z
                     ),
-                    transform.rotation
+                    transform.rotation * GetRandomCardRotation()
                 );
             }
+        }
+        
+        private Quaternion GetRandomCardRotation()
+        {
+            return Quaternion.AngleAxis
+            (
+                Random.Range(-randomRotationAngle, randomRotationAngle),
+                Vector3.up
+            );
         }
     }
 }
