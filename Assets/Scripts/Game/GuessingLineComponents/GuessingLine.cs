@@ -26,7 +26,7 @@ namespace Game.GuessingLineComponents
             }
         }
 
-        public List<Card> GetAllValidCards()
+        public IList<Card> GetAllValidCards()
         {
             return _filledCardSlots.ConvertAll(cardSlot => cardSlot.ValidCard);
         }

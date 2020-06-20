@@ -6,12 +6,12 @@ namespace Game.Rules
 {
     public class RuleBlackAndRed : AbstractRule
     {
-        public override List<CardValue> GetInitialCardValues(ReadOnlyCollection<CardValue> remainingCards)
+        public override IList<CardValue> GetInitialCardValues(IList<CardValue> remainingCards)
         {
             return new List<CardValue> {remainingCards[0]};
         }
 
-        public override bool IsValid(List<Card> previousCards, Card newCard)
+        public override bool IsValid(IList<Card> previousCards, Card newCard)
         {
             var nbPreviousCards = previousCards.Count;
             if (nbPreviousCards == 0)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Game.CardComponents;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace Game
         [SerializeField] private float spaceBetweenCards = 0.5f;
         
         private readonly List<Card> _cards = new List<Card>();
+
+        public IList<Card> GetAllCards() => _cards.AsReadOnly();
 
         public void AddCard([NotNull] Card card)
         {

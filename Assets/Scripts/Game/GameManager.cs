@@ -1,8 +1,10 @@
+using System;
 using System.Linq;
 using Game.CardComponents;
 using Game.GuessingLineComponents;
 using Game.Rules;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -14,6 +16,8 @@ namespace Game
 
         [SerializeField] private int startHandSize = 3;
         [SerializeField] private int nbDrawCardOnInvalidCard = 2;
+        [SerializeField] private int nbDrawCardOnWrongNoPlay = 5;
+        [SerializeField] private int handReductionOnGoodNoPlay = 4;
         
         private AbstractRule _activeRule;
 
@@ -30,10 +34,7 @@ namespace Game
                 guessingLine.AddCard(pickedCard, true);
             }
             
-            for (var i = 0; i < startHandSize; i++)
-            {
-                DrawCardToHand();
-            }
+            DrawCardsToHand(startHandSize);
         }
 
         public void PlayCard(Card card)
@@ -43,17 +44,39 @@ namespace Game
                 return;
             }
             
-            hand.RemoveCard(card);
 
             var isValidCard = _activeRule.IsValid(guessingLine.GetAllValidCards(), card);
-            guessingLine.AddCard(card, isValidCard);
+            MoveCardFromHandToGuessingLine(card, isValidCard);
 
             if (!isValidCard)
             {
-                for (var i = 0; i < nbDrawCardOnInvalidCard; i++)
+                DrawCardsToHand(nbDrawCardOnInvalidCard);
+            }
+        }
+
+        public void ChooseNoPlay()
+        {
+            var allCardsInHand = hand.GetAllCards();
+            var playableCards = allCardsInHand.Where(card => _activeRule.IsValid(guessingLine.GetAllValidCards(), card)).ToList();
+
+            var nbPlayableCards = playableCards.Count;
+            var nbCardsInHand = allCardsInHand.Count;
+            
+            if (nbPlayableCards > 0)
+            {
+                var randomPlayableCard = playableCards[Random.Range(0, nbPlayableCards)];
+                MoveCardFromHandToGuessingLine(randomPlayableCard, true);
+                DrawCardsToHand(nbDrawCardOnWrongNoPlay);
+            }
+            else
+            {
+                for (var index = allCardsInHand.Count - 1; index >= 0; index--)
                 {
-                    DrawCardToHand();
+                    var card = allCardsInHand[index];
+                    MoveCardFromHandToGuessingLine(card, false);
                 }
+
+                DrawCardsToHand(Math.Max(0, nbCardsInHand - handReductionOnGoodNoPlay));
             }
         }
 
@@ -75,12 +98,21 @@ namespace Game
             DragPlayground(offset);
         }
 
-        public void DrawCardToHand()
+        private void MoveCardFromHandToGuessingLine(Card card, bool isValidCard)
         {
-            var card = deck.DrawCard();
-            if (card)
+            hand.RemoveCard(card);
+            guessingLine.AddCard(card, isValidCard);
+        }
+
+        private void DrawCardsToHand(int nbCards)
+        {
+            for (var i = 0; i < nbCards; i++)
             {
-                hand.AddCard(card);
+                var card = deck.DrawCard();
+                if (card)
+                {
+                    hand.AddCard(card);
+                }
             }
         }
 

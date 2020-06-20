@@ -22,7 +22,7 @@ namespace Game
             ResetRemainingCards();
         }
 
-        public ReadOnlyCollection<CardValue> GetAllRemainingCards() => _remainingCards.AsReadOnly();
+        public IList<CardValue> GetAllRemainingCards() => _remainingCards.AsReadOnly();
 
         [CanBeNull]
         public Card DrawCard()

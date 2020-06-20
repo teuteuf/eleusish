@@ -7,7 +7,7 @@ namespace Game.Rules
 {
     public abstract class AbstractRule : MonoBehaviour
     {
-        public abstract List<CardValue> GetInitialCardValues(ReadOnlyCollection<CardValue> remainingCards);
-        public abstract bool IsValid(List<Card> previousCards, Card newCard);
+        public abstract IList<CardValue> GetInitialCardValues(IList<CardValue> remainingCards);
+        public abstract bool IsValid(IList<Card> previousCards, Card newCard);
     }
 }

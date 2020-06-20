@@ -322,7 +322,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Draw Card
+  m_Text: NO PLAY
 --- !u!222 &669055688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 1076972280}
   - component: {fileID: 1076972279}
   m_Layer: 5
-  m_Name: ButtonAddCard
+  m_Name: ButtonNoPlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,11 +606,11 @@ RectTransform:
   m_Father: {fileID: 1215255059}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 320, y: 60}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: 300, y: 60}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1076972279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1404435665}
-        m_MethodName: DrawCardToHand
+        m_MethodName: ChooseNoPlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1215255059}
   m_Layer: 5
-  m_Name: Debug
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,8 +866,10 @@ MonoBehaviour:
   deck: {fileID: 1402898974}
   hand: {fileID: 1715086728}
   guessingLine: {fileID: 1396643390}
-  startHandSize: 10
+  startHandSize: 14
   nbDrawCardOnInvalidCard: 2
+  nbDrawCardOnWrongNoPlay: 5
+  handReductionOnGoodNoPlay: 4
 --- !u!4 &1404435666
 Transform:
   m_ObjectHideFlags: 0
@@ -932,7 +934,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715086726}
   m_LocalRotation: {x: -0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 1.25, z: -0.75}
+  m_LocalPosition: {x: 0, y: 0.4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -950,7 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830d61f434824b54ac037c64e9d00022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceBetweenCards: 0.6
+  spaceBetweenCards: 0.5
 --- !u!1 &1892778947
 GameObject:
   m_ObjectHideFlags: 0
