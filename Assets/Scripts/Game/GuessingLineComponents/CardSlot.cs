@@ -8,6 +8,7 @@ namespace Game.GuessingLineComponents
     {
         [SerializeField] private float spaceBetweenInvalidCards = 0.5f;
         [SerializeField] private float spaceBetweenInvalidAndValidCards = 0.5f;
+        [SerializeField] private float randomRotationAngle = 5.0f;
         
         public Card ValidCard { get; private set; } = default;
         
@@ -33,8 +34,9 @@ namespace Game.GuessingLineComponents
             var cardTransform = card.transform;
 
             cardTransform.parent = currentCardSlotTransform;
+            
 
-            card.Move(currentCardSlotTransform.position, currentCardSlotTransform.rotation);
+            card.Move(currentCardSlotTransform.position, currentCardSlotTransform.rotation * GetRandomCardRotation());
         }
 
         private void PositionInvalidCard(Card card)
@@ -52,7 +54,16 @@ namespace Game.GuessingLineComponents
 
             cardTransform.parent = currentCardSlotTransform;
             
-            card.Move(cardPosition, cardRotation);
+            card.Move(cardPosition, cardRotation * GetRandomCardRotation());
+        }
+
+        private Quaternion GetRandomCardRotation()
+        {
+            return Quaternion.AngleAxis
+            (
+                Random.Range(-randomRotationAngle, randomRotationAngle),
+                Vector3.up
+            );
         }
     }
 }
