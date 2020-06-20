@@ -779,7 +779,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396643389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.275, y: 0.001, z: 0.5}
+  m_LocalPosition: {x: -2.975, y: 0.001, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 212161516}
@@ -816,6 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabCard: {fileID: 4274627657826538382, guid: fd768b0efab986441a97134a08a687fc,
     type: 3}
+  nbCardsDuplicate: 2
 --- !u!4 &1402898975
 Transform:
   m_ObjectHideFlags: 0
@@ -824,7 +825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402898973}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: -4, y: 0.001, z: 0.5}
+  m_LocalPosition: {x: -3.7, y: 0.001, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1892778948}
@@ -866,6 +867,7 @@ MonoBehaviour:
   hand: {fileID: 1715086728}
   guessingLine: {fileID: 1396643390}
   startHandSize: 10
+  nbDrawCardOnInvalidCard: 2
 --- !u!4 &1404435666
 Transform:
   m_ObjectHideFlags: 0

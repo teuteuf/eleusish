@@ -1,20 +1,25 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Game.CardComponents;
-using UnityEngine;
 
 namespace Game.Rules
 {
-    public class RuleBlackAndRed : MonoBehaviour
+    public class RuleBlackAndRed : AbstractRule
     {
-        public bool IsValid(List<Card> previousCards, Card newCard)
+        public override List<CardValue> GetInitialCardValues(ReadOnlyCollection<CardValue> remainingCards)
         {
-            var nbPrviousCards = previousCards.Count;
-            if (nbPrviousCards == 0)
+            return new List<CardValue> {remainingCards[0]};
+        }
+
+        public override bool IsValid(List<Card> previousCards, Card newCard)
+        {
+            var nbPreviousCards = previousCards.Count;
+            if (nbPreviousCards == 0)
             {
                 return true;
             }
 
-            var lastCard = previousCards[nbPrviousCards - 1];
+            var lastCard = previousCards[nbPreviousCards - 1];
             var lastSuite = lastCard.Value.Suite;
             var newSuite = newCard.Value.Suite;
 

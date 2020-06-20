@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using Game.CardComponents;
 using Game.GuessingLineComponents;
 using Game.Rules;
@@ -13,16 +13,23 @@ namespace Game
         [SerializeField] private GuessingLine guessingLine = default;
 
         [SerializeField] private int startHandSize = 3;
+        [SerializeField] private int nbDrawCardOnInvalidCard = 2;
         
-        private RuleBlackAndRed _activeRule;
+        private AbstractRule _activeRule;
 
         private void Awake()
         {
-            _activeRule = GetComponent<RuleBlackAndRed>();
+            _activeRule = GetComponent<AbstractRule>();
         }
 
         private void Start()
         {
+            var initialCardValues = _activeRule.GetInitialCardValues(deck.GetAllRemainingCards());
+            foreach (var pickedCard in initialCardValues.Select(initialCardValue => deck.PickCard(initialCardValue)))
+            {
+                guessingLine.AddCard(pickedCard, true);
+            }
+            
             for (var i = 0; i < startHandSize; i++)
             {
                 DrawCardToHand();
@@ -43,8 +50,10 @@ namespace Game
 
             if (!isValidCard)
             {
-                DrawCardToHand();
-                DrawCardToHand();
+                for (var i = 0; i < nbDrawCardOnInvalidCard; i++)
+                {
+                    DrawCardToHand();
+                }
             }
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Game.CardComponents;
 using JetBrains.Annotations;
@@ -21,6 +22,8 @@ namespace Game
             ResetRemainingCards();
         }
 
+        public ReadOnlyCollection<CardValue> GetAllRemainingCards() => _remainingCards.AsReadOnly();
+
         [CanBeNull]
         public Card DrawCard()
         {
@@ -29,8 +32,25 @@ namespace Game
                 return null;
             }
 
-            var cardValue = _remainingCards[0];
-            _remainingCards.RemoveAt(0);
+            return PickCardAtIndex(0);
+        }
+
+        [CanBeNull]
+        public Card PickCard(CardValue value)
+        {
+            var pickedCardIndex = _remainingCards.FindIndex(cardValue => cardValue.Rank == value.Rank && cardValue.Suite == value.Suite);
+            if (pickedCardIndex == -1)
+            {
+                return null;
+            }
+
+            return PickCardAtIndex(pickedCardIndex);
+        }
+
+        private Card PickCardAtIndex(int cardIndex)
+        {
+            var cardValue = _remainingCards[cardIndex];
+            _remainingCards.RemoveAt(cardIndex);
 
             var deckTransform = transform;
             var card = Instantiate(prefabCard, deckTransform.position, deckTransform.rotation);
