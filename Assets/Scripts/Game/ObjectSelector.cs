@@ -59,7 +59,7 @@ namespace Game
             var card = selectedGameObject.GetComponentInParent<Card>();
             if (card)
             {
-                _gameManager.PlayCard(card);
+                _gameManager.SelectCard(card);
             }
         }
 

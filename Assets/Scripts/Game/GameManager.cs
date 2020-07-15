@@ -37,14 +37,23 @@ namespace Game
             DrawCardsToHand(startHandSize);
         }
 
-        public void PlayCard(Card card)
+        public void SelectCard(Card card)
         {
-            if (card.transform.parent != hand.transform)
-            {
-                return;
-            }
             
+            if (card.transform.IsChildOf(guessingLine.transform))
+            {
+                var cardSlot = card.GetComponentInParent<CardSlot>();
+                cardSlot.ToggleInvalidCards();
+            }
 
+            if (card.transform.IsChildOf(hand.transform))
+            {
+                PlayCard(card);
+            }
+        }
+
+        private void PlayCard(Card card)
+        {
             var isValidCard = _activeRule.IsValid(guessingLine.GetAllValidCards(), card);
             MoveCardFromHandToGuessingLine(card, isValidCard);
 
