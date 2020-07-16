@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.CardComponents;
 using Game.GuessingLineComponents;
 using UnityEngine;
@@ -11,6 +12,13 @@ namespace Game
         
         private CardSlot _shownCardSlot;
         private List<Card> _declinedCards;
+
+        private Vector3 _originalLinePosition;
+
+        private void Awake()
+        {
+            _originalLinePosition = transform.position;
+        }
 
         public void ShowCardSlotContent(CardSlot cardSlot)
         {
@@ -29,6 +37,8 @@ namespace Game
         {
             if (_shownCardSlot)
             {
+                transform.position = _originalLinePosition;
+                
                 _declinedCards.ForEach(card => _shownCardSlot.PlaceCard(card, false));
                 
                 _declinedCards = null;

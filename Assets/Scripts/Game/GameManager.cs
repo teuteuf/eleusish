@@ -99,12 +99,15 @@ namespace Game
 
         public void DragCard(Card card, Vector3 offset)
         {
-            if (card.transform.parent == hand.transform)
+            if (card.transform.IsChildOf(hand.transform))
             {
                 hand.transform.position += Vector3.right * offset.x;
             }
-            
-            if (card.transform.parent.parent == guessingLine.transform)
+            else if (card.transform.IsChildOf(declinedCardLine.transform))
+            {
+                declinedCardLine.transform.position += Vector3.right * offset.x;
+            }
+            else if (card.transform.IsChildOf(guessingLine.transform))
             {
                 DragPlayground(offset);
             }
