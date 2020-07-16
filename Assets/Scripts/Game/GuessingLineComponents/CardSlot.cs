@@ -10,11 +10,9 @@ namespace Game.GuessingLineComponents
         [SerializeField] private float spaceBetweenInvalidAndValidCards = 0.5f;
         [SerializeField] private float randomRotationAngle = 5.0f;
 
-        public Card ValidCard { get; private set; } = default;
+        public Card ValidCard { get; private set; }
 
-        private readonly List<Card> _invalidCards = new List<Card>();
-
-        private bool invalidCardsDisplayed = false;
+        private List<Card> _invalidCards = new List<Card>();
 
         public void PlaceCard(Card card, bool respectRule)
         {
@@ -30,37 +28,12 @@ namespace Game.GuessingLineComponents
             }
         }
 
-        public void ToggleInvalidCards()
+        public List<Card> WithdrawInvalidCards()
         {
-            if (invalidCardsDisplayed)
-            {
-                HideInvalidCards();
-            }
-            else
-            {
-                ShowInvalidCards();
-            }
+            var withdrawnCards = _invalidCards;
+            _invalidCards = new List<Card>();
 
-            invalidCardsDisplayed = !invalidCardsDisplayed;
-        }
-
-        private void HideInvalidCards()
-        {
-            for (var i = 0; i < _invalidCards.Count; i++)
-            {
-                PositionInvalidCard(_invalidCards[i], i + 1);
-            }
-        }
-
-        private void ShowInvalidCards()
-        {
-            foreach (var invalidCard in _invalidCards)
-            {
-                invalidCard.Move(
-                    Vector3.zero,
-                    transform.rotation
-                );
-            }
+            return withdrawnCards;
         }
 
         private void PositionValidCard(Card card)

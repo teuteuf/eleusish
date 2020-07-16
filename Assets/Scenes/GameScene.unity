@@ -738,6 +738,65 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1255678393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255678394}
+  - component: {fileID: 1255678395}
+  - component: {fileID: 1255678396}
+  m_Layer: 0
+  m_Name: DeclinedCardLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1255678394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255678393}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1255678395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255678393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4710f7f35cd0be1498ad6a13664e08d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardsOrganizer: {fileID: 1255678396}
+--- !u!114 &1255678396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255678393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5946e2a8a9b44938e692be61ec33f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spaceBetweenCards: 0.6
+  randomRotationAngle: 2
 --- !u!1 &1396643389
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +925,7 @@ MonoBehaviour:
   deck: {fileID: 1402898974}
   hand: {fileID: 1715086728}
   guessingLine: {fileID: 1396643390}
+  declinedCardLine: {fileID: 1255678395}
   startHandSize: 14
   nbDrawCardOnInvalidCard: 2
   nbDrawCardOnWrongNoPlay: 5
@@ -919,6 +979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1715086727}
   - component: {fileID: 1715086728}
+  - component: {fileID: 1715086729}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -950,6 +1011,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 830d61f434824b54ac037c64e9d00022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardsOrganizer: {fileID: 1715086729}
+--- !u!114 &1715086729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715086726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5946e2a8a9b44938e692be61ec33f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spaceBetweenCards: 0.5

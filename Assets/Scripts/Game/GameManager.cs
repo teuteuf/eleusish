@@ -13,6 +13,7 @@ namespace Game
         [SerializeField] private Deck deck = default;
         [SerializeField] private Hand hand = default;
         [SerializeField] private GuessingLine guessingLine = default;
+        [SerializeField] private DeclinedCardLine declinedCardLine = default;
 
         [SerializeField] private int startHandSize = 3;
         [SerializeField] private int nbDrawCardOnInvalidCard = 2;
@@ -39,14 +40,17 @@ namespace Game
 
         public void SelectCard(Card card)
         {
-            
+
             if (card.transform.IsChildOf(guessingLine.transform))
             {
                 var cardSlot = card.GetComponentInParent<CardSlot>();
-                cardSlot.ToggleInvalidCards();
+                declinedCardLine.ShowCardSlotContent(cardSlot);
             }
-
-            if (card.transform.IsChildOf(hand.transform))
+            else if (card.transform.IsChildOf(declinedCardLine.transform))
+            {
+                declinedCardLine.PutBackCards();
+            }
+            else if (card.transform.IsChildOf(hand.transform))
             {
                 PlayCard(card);
             }
@@ -54,6 +58,8 @@ namespace Game
 
         private void PlayCard(Card card)
         {
+            declinedCardLine.PutBackCards();
+            
             var isValidCard = _activeRule.IsValid(guessingLine.GetAllValidCards(), card);
             MoveCardFromHandToGuessingLine(card, isValidCard);
 
@@ -65,6 +71,8 @@ namespace Game
 
         public void ChooseNoPlay()
         {
+            declinedCardLine.PutBackCards();
+            
             var allCardsInHand = hand.GetAllCards();
             var playableCards = allCardsInHand.Where(card => _activeRule.IsValid(guessingLine.GetAllValidCards(), card)).ToList();
 
