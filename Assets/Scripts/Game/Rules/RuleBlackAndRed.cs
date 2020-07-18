@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Game.CardComponents;
 
 namespace Game.Rules
@@ -11,7 +10,7 @@ namespace Game.Rules
             return new List<CardValue> {remainingCards[0]};
         }
 
-        public override bool IsValid(IList<Card> previousCards, Card newCard)
+        public override bool IsValid(IList<CardValue> previousCards, CardValue newCard)
         {
             var nbPreviousCards = previousCards.Count;
             if (nbPreviousCards == 0)
@@ -20,8 +19,8 @@ namespace Game.Rules
             }
 
             var lastCard = previousCards[nbPreviousCards - 1];
-            var lastSuite = lastCard.Value.Suite;
-            var newSuite = newCard.Value.Suite;
+            var lastSuite = lastCard.Suite;
+            var newSuite = newCard.Suite;
 
             return IsRed(lastSuite) && IsBlack(newSuite) || IsBlack(lastSuite) && IsRed(newSuite);
         }

@@ -19,7 +19,7 @@ namespace Game.CardComponents
         King
     }
 
-    internal static class CardValueMethods
+    internal static class CardRankMethods
     {
         public static string GetStringValue(this CardRank rank)
         {

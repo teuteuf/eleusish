@@ -19,7 +19,7 @@ namespace Game
         [SerializeField] private int nbDrawCardOnInvalidCard = 2;
         [SerializeField] private int nbDrawCardOnWrongNoPlay = 5;
         [SerializeField] private int handReductionOnGoodNoPlay = 4;
-        
+
         private AbstractRule _activeRule;
 
         private void Awake()
@@ -34,13 +34,12 @@ namespace Game
             {
                 guessingLine.AddCard(pickedCard, true);
             }
-            
+
             DrawCardsToHand(startHandSize);
         }
 
         public void SelectCard(Card card)
         {
-
             if (card.transform.IsChildOf(guessingLine.transform))
             {
                 var cardSlot = card.GetComponentInParent<CardSlot>();
@@ -59,8 +58,11 @@ namespace Game
         private void PlayCard(Card card)
         {
             declinedCardLine.PutBackCards();
-            
-            var isValidCard = _activeRule.IsValid(guessingLine.GetAllValidCards(), card);
+
+            var isValidCard = _activeRule.IsValid(
+                guessingLine.GetAllValidCards().Select(validCard => validCard.Value).ToArray(),
+                card.Value
+            );
             MoveCardFromHandToGuessingLine(card, isValidCard);
 
             if (!isValidCard)
@@ -72,13 +74,17 @@ namespace Game
         public void ChooseNoPlay()
         {
             declinedCardLine.PutBackCards();
-            
+
             var allCardsInHand = hand.GetAllCards();
-            var playableCards = allCardsInHand.Where(card => _activeRule.IsValid(guessingLine.GetAllValidCards(), card)).ToList();
+            var playableCards = allCardsInHand.Where(card => _activeRule.IsValid(
+                    guessingLine.GetAllValidCards().Select(validCard => validCard.Value).ToArray(),
+                    card.Value
+                ))
+                .ToList();
 
             var nbPlayableCards = playableCards.Count;
             var nbCardsInHand = allCardsInHand.Count;
-            
+
             if (nbPlayableCards > 0)
             {
                 var randomPlayableCard = playableCards[Random.Range(0, nbPlayableCards)];
