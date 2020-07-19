@@ -2,14 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.CardComponents;
+using JetBrains.Annotations;
 using Jint;
 using Jint.Native;
 using UnityEngine;
 
 namespace Game.Rules
 {
-    public class RuleJsBlackAndRed : AbstractRule
+    public class RuleJs : AbstractRule
     {
+        [TextArea(10, 20)]
+        [SerializeField]
+        private string jsRule = default;
+        
         private Engine _jintEngine;
         private JsValue _getInitialCards;
         private JsValue _isValid;
@@ -18,28 +23,7 @@ namespace Game.Rules
         {
             _jintEngine = new Engine();
 
-            _jintEngine
-                .Execute(@"
-                    function getInitialCards (remainingCards) {
-                        return [remainingCards[0]];
-                    }
-
-                    function isValid (previousCards, newCard) {
-                        if (previousCards.length === 0) {
-                            return true;
-                        }
-
-                        function getColor(card) {
-                            if (['Diamonds', 'Hearts'].includes(card.Suite)) {
-                                return 'red';
-                            } else {
-                                return 'black';
-                            }
-                        }
-
-                        return getColor(previousCards[previousCards.length - 1]) !== getColor(newCard);
-                    }
-                ");
+            _jintEngine.Execute(jsRule);
 
             _getInitialCards = _jintEngine.GetValue("getInitialCards");
             _isValid = _jintEngine.GetValue("isValid");
@@ -90,8 +74,8 @@ namespace Game.Rules
 
         private struct CardValueForJs
         {
-            public string Rank { get; set; }
-            public string Suite { get; set; }
+            public string Rank { [UsedImplicitly] get; set; }
+            public string Suite { [UsedImplicitly] get; set; }
         }
     }
 }

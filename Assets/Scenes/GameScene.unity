@@ -966,9 +966,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1404435664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69bab1509de74a31a24173e02a1a3241, type: 3}
+  m_Script: {fileID: 11500000, guid: 458a20d44e194057af22b590735b36e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jsRule: "function getInitialCards (remainingCards) {\r\n    return [remainingCards[0]];\r\n}\r\n\r\nfunction
+    isValid (previousCards, newCard) {\r\n    if (previousCards.length === 0) {\r\n       
+    return true;\r\n    }\r\n\r\n    function getColor(card) {\r\n        if (['Diamonds',
+    'Hearts'].includes(card.Suite)) {\r\n            return 'red';\r\n        } else
+    {\r\n            return 'black';\r\n        }\r\n    }\r\n\r\n    return getColor(previousCards[previousCards.length
+    - 1]) !== getColor(newCard);\r\n}"
 --- !u!1 &1715086726
 GameObject:
   m_ObjectHideFlags: 0
