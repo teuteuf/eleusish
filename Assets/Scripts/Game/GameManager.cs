@@ -3,6 +3,7 @@ using System.Linq;
 using Game.CardComponents;
 using Game.GuessingLineComponents;
 using Game.Rules;
+using Menu;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,8 @@ namespace Game
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private SceneSwitcher sceneSwitcher = default;
+        [SerializeField] private GameSave gameSave = default;
         [SerializeField] private Deck deck = default;
         [SerializeField] private Hand hand = default;
         [SerializeField] private GuessingLine guessingLine = default;
@@ -21,6 +24,8 @@ namespace Game
         [SerializeField] private int handReductionOnGoodNoPlay = 4;
 
         private AbstractRule _activeRule;
+
+        private int nbActions = 0;
 
         private void Awake()
         {
@@ -57,22 +62,29 @@ namespace Game
 
         private void PlayCard(Card card)
         {
+            nbActions++;
             declinedCardLine.PutBackCards();
 
             var isValidCard = _activeRule.IsValid(
                 guessingLine.GetAllValidCards().Select(validCard => validCard.Value).ToArray(),
                 card.Value
             );
+            
             MoveCardFromHandToGuessingLine(card, isValidCard);
 
             if (!isValidCard)
             {
                 DrawCardsToHand(nbDrawCardOnInvalidCard);
             }
+            else if (hand.GetAllCards().Count == 0)
+            {
+                HandleSuccess();
+            }
         }
 
         public void ChooseNoPlay()
         {
+            nbActions++;
             declinedCardLine.PutBackCards();
 
             var allCardsInHand = hand.GetAllCards();
@@ -99,7 +111,15 @@ namespace Game
                     MoveCardFromHandToGuessingLine(card, false);
                 }
 
-                DrawCardsToHand(Math.Max(0, nbCardsInHand - handReductionOnGoodNoPlay));
+                var newNbCardsInHand = nbCardsInHand - handReductionOnGoodNoPlay;
+                if (newNbCardsInHand <= 0)
+                {
+                    HandleSuccess();
+                }
+                else
+                {
+                    DrawCardsToHand(newNbCardsInHand);
+                }
             }
         }
 
@@ -139,12 +159,27 @@ namespace Game
                 {
                     hand.AddCard(card);
                 }
+                else
+                {
+                    HandleFail();
+                }
             }
         }
 
         private void DragPlayground(Vector3 offset)
         {
             guessingLine.transform.parent.position += Vector3.right * offset.x;
+        }
+
+        private void HandleFail()
+        {
+            sceneSwitcher.Switch(AvailableScene.Fail);
+        }
+
+        private void HandleSuccess()
+        {
+            gameSave.Save(GameSave.SaveKey.LastNbActions, nbActions);
+            sceneSwitcher.Switch(AvailableScene.Success);
         }
     }
 }
