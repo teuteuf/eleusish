@@ -6,10 +6,10 @@ namespace Game.Rules
 {
     public class RuleLoader : MonoBehaviour
     {
+        public LoadedRule[] LoadedRules { get; private set; }
+
         [SerializeField]
         private string rulesEndpoint = default;
-
-        private LoadedRule[] _loadedRules;
 
         private void Start()
         {
@@ -42,7 +42,7 @@ namespace Game.Rules
 
         private void OnLoadSuccess(LoadedRules loadedRules)
         {
-            _loadedRules = loadedRules.rules;
+            LoadedRules = loadedRules.rules;
         }
 
         private void OnLoadFailed()

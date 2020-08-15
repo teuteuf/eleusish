@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458a20d44e194057af22b590735b36e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsRule: "function getInitialCards (remainingCards) {\r\n    return [remainingCards[0]];\r\n}\r\n\r\nfunction
+  defaultJsRule: "function getInitialCards (remainingCards) {\r\n    return [remainingCards[0]];\r\n}\r\n\r\nfunction
     isValid (previousCards, newCard) {\r\n    if (previousCards.length === 0) {\r\n       
     return true;\r\n    }\r\n\r\n    function getColor(card) {\r\n        if (['Diamonds',
     'Hearts'].includes(card.Suite)) {\r\n            return 'red';\r\n        } else
