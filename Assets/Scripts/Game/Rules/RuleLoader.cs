@@ -8,14 +8,24 @@ namespace Game.Rules
     {
         [SerializeField] private string rulesEndpoint = default;
 
+        private static RuleLoader _instance;
+        
         public LoadedRule[] LoadedRules { get; private set; }
 
         public bool IsLoading { get; private set; } = false;
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            StartCoroutine(LoadRules());
+            if (_instance == null)
+            {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+                StartCoroutine(LoadRules());
+            }
+            else
+            {
+                Destroy(this);
+            }
         }
 
         private IEnumerator LoadRules()

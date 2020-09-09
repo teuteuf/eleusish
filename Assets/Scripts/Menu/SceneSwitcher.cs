@@ -9,7 +9,8 @@ namespace Menu
         Home,
         Game,
         Success,
-        Fail
+        Fail,
+        Account
     }
     
     public class SceneSwitcher : MonoBehaviour
@@ -18,6 +19,7 @@ namespace Menu
         public void SwitchToGame() => Switch(AvailableScene.Game);
         public void SwitchToSuccess() => Switch(AvailableScene.Success);
         public void SwitchToFail() => Switch(AvailableScene.Fail);
+        public void SwitchToAccount() => Switch(AvailableScene.Account);
 
         public void Switch(AvailableScene scene)
         {
@@ -34,6 +36,9 @@ namespace Menu
                     break;
                 case AvailableScene.Fail:
                     SceneManager.LoadScene("FailScene");
+                    break;
+                case AvailableScene.Account:
+                    SceneManager.LoadScene("AccountScene");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(scene), scene, null);

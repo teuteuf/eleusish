@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SuccessScene.unity
     guid: 53f8d0774ffa45046ae741696a08b6e7
+  - enabled: 1
+    path: Assets/Scenes/AccountScene.unity
+    guid: ad4234f5ea824b647a91dc4ea7783fea
   m_configObjects: {}
