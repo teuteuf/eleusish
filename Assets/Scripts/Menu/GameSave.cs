@@ -6,7 +6,9 @@ namespace Menu
     {
         public enum SaveKey
         {
-            LastNbActions
+            LastNbActions,
+            PlayerPseudo,
+            PlayerId
         }
 
         public void Save(SaveKey saveKey, int value) => PlayerPrefs.SetInt(saveKey.ToString(), value);
@@ -16,5 +18,7 @@ namespace Menu
         public int LoadInt(SaveKey saveKey) => PlayerPrefs.GetInt(saveKey.ToString());
         public string LoadString(SaveKey saveKey) => PlayerPrefs.GetString(saveKey.ToString());
         public float LoadFloat(SaveKey saveKey) => PlayerPrefs.GetFloat(saveKey.ToString());
+
+        public bool HasKey(SaveKey saveKey) => PlayerPrefs.HasKey(saveKey.ToString());
     }
 }

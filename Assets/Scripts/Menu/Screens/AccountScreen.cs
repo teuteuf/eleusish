@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -9,10 +8,43 @@ namespace Menu.Screens
     public class AccountScreen : MonoBehaviour
     {
         [SerializeField] private string playerEndpoint = default;
+
+        [SerializeField] private GameSave gameSave = default;
         
+        [SerializeField] private GameObject inputPseudoLayer = default;
         [SerializeField] private Button sendButton = default;
         
+        [SerializeField] private GameObject displayPseudoLayer = default;
+        [SerializeField] private Text pseudoText = default;
+        [SerializeField] private Text idText = default;
+        
         private string _pseudo;
+
+        private void Start()
+        {
+            UpdateScreen();
+        }
+
+        private void UpdateScreen()
+        {
+
+            if (gameSave.HasKey(GameSave.SaveKey.PlayerPseudo) && gameSave.HasKey(GameSave.SaveKey.PlayerId))
+            {
+                inputPseudoLayer.SetActive(false);
+                displayPseudoLayer.SetActive(true);
+                
+                var pseudo = gameSave.LoadString(GameSave.SaveKey.PlayerPseudo);
+                var id = gameSave.LoadString(GameSave.SaveKey.PlayerId);
+                pseudoText.text = pseudo;
+                idText.text = $"ID: {id}";
+            }
+            else
+            {
+                inputPseudoLayer.SetActive(true);
+                displayPseudoLayer.SetActive(false);
+            }
+            
+        }
 
         public void SetPseudo(string pseudo)
         {
@@ -43,9 +75,11 @@ namespace Menu.Screens
 
             if (request.responseCode == 201)
             {
-                var result = request.downloadHandler.text;
-                Debug.Log("player created");
-                Debug.Log(result);
+                var createdPlayer = JsonUtility.FromJson<CreatedPlayer>(request.downloadHandler.text);
+                gameSave.Save(GameSave.SaveKey.PlayerPseudo, createdPlayer.pseudo);
+                gameSave.Save(GameSave.SaveKey.PlayerId, createdPlayer.id);
+                
+                UpdateScreen();
             }
             else
             {
@@ -58,6 +92,12 @@ namespace Menu.Screens
 
         private class NewPlayerBody
         {
+            public string pseudo;
+        }
+
+        private class CreatedPlayer
+        {
+            public string id;
             public string pseudo;
         }
     }
