@@ -5,6 +5,7 @@ using Game.CardComponents;
 using JetBrains.Annotations;
 using Jint;
 using Jint.Native;
+using Menu;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +16,8 @@ namespace Game.Rules
         [TextArea(10, 20)]
         [SerializeField]
         private string defaultJsRule = default;
+
+        [SerializeField] private GameSave gameSave = default;
         
         private Engine _jintEngine;
         private JsValue _getInitialCards;
@@ -24,10 +27,24 @@ namespace Game.Rules
         {
             var ruleLoader = FindObjectOfType<RuleLoader>();
             var hasLoadedRules = ruleLoader != null && ruleLoader.LoadedRules != null && ruleLoader.LoadedRules.Length > 0;
-            var jsRule = hasLoadedRules
-                ? ruleLoader.LoadedRules[Random.Range(0, ruleLoader.LoadedRules.Length)].code
-                : defaultJsRule;
-            
+            var hasRuleToValidate = ruleLoader != null && ruleLoader.RuleToValidate != null;
+            var isValidationRun = gameSave.LoadBool(GameSave.SaveKey.ValidationRun);
+
+
+            string jsRule;
+            if (!isValidationRun && hasLoadedRules)
+            {
+                jsRule = ruleLoader.LoadedRules[Random.Range(0, ruleLoader.LoadedRules.Length)].code;
+            }
+            else if (isValidationRun && hasRuleToValidate)
+            {
+                jsRule = ruleLoader.RuleToValidate.code;
+            }
+            else
+            {
+                jsRule = defaultJsRule;
+            }
+
             _jintEngine = new Engine();
 
             _jintEngine.Execute(jsRule);

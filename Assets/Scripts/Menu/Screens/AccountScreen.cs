@@ -83,8 +83,8 @@ namespace Menu.Screens
             }
             else
             {
-                Debug.Log("player creation failed");
-                Debug.Log(request.error);
+                Debug.LogError("player creation failed");
+                Debug.LogError(request.error);
             }
             
             sendButton.interactable = true;

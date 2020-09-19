@@ -11,5 +11,6 @@ namespace Game.Rules
     {
         public string id;
         public string code;
+        public bool validated;
     }
 }

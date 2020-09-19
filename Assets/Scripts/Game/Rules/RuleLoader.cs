@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Menu;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,11 +9,15 @@ namespace Game.Rules
     {
         [SerializeField] private string rulesEndpoint = default;
 
+        [SerializeField] private GameSave gameSave = default;
+
         private static RuleLoader _instance;
         
         public LoadedRule[] LoadedRules { get; private set; }
+        public LoadedRule RuleToValidate { get; private set; }
 
-        public bool IsLoading { get; private set; } = false;
+        public bool IsLoadingRules { get; private set; } = false;
+        public bool IsLoadingRuleToValidate { get; private set; } = false;
 
         private void Awake()
         {
@@ -20,7 +25,13 @@ namespace Game.Rules
             {
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
+                
                 StartCoroutine(LoadRules());
+
+                if (gameSave.HasKey(GameSave.SaveKey.PlayerId))
+                {
+                    StartCoroutine(LoadRuleToValidate(gameSave.LoadString(GameSave.SaveKey.PlayerId)));
+                }
             }
             else
             {
@@ -30,9 +41,9 @@ namespace Game.Rules
 
         private IEnumerator LoadRules()
         {
-            IsLoading = true;
+            IsLoadingRules = true;
 
-            var request = UnityWebRequest.Get(rulesEndpoint);
+            var request = UnityWebRequest.Get($"{rulesEndpoint}?validated=true");
             yield return request.SendWebRequest();
             yield return new WaitUntil(() => request.isDone);
 
@@ -40,23 +51,42 @@ namespace Game.Rules
             {
                 var result = request.downloadHandler.text;
                 var loadedRules = JsonUtility.FromJson<LoadedRules>($"{{\"rules\": {result}}}");
-                OnLoadSuccess(loadedRules);
+                
+                Debug.Log($"Rules loaded. Nb rules: {loadedRules.rules.Length}");
+                
+                LoadedRules = loadedRules.rules;
+                IsLoadingRules = false;
             }
             else
             {
-                OnLoadFailed();
+                Debug.LogError("Failed to load rules.");
+                IsLoadingRules = false;
             }
         }
 
-        private void OnLoadSuccess(LoadedRules loadedRules)
+        private IEnumerator LoadRuleToValidate(string playerId)
         {
-            LoadedRules = loadedRules.rules;
-            IsLoading = false;
-        }
+            IsLoadingRuleToValidate = true;
 
-        private void OnLoadFailed()
-        {
-            IsLoading = false;
+            var request = UnityWebRequest.Get($"{rulesEndpoint}?validated=false&authorId={playerId}");
+            yield return request.SendWebRequest();
+            yield return new WaitUntil(() => request.isDone);
+
+            if (request.responseCode == 200)
+            {
+                var result = request.downloadHandler.text;
+                var loadedRules = JsonUtility.FromJson<LoadedRules>($"{{\"rules\": {result}}}");
+                
+                Debug.Log($"Rules to validate loaded. Nb rules: {loadedRules.rules.Length}");
+                
+                RuleToValidate = loadedRules.rules.Length > 0 ? loadedRules.rules[0] : null;
+                IsLoadingRuleToValidate = false;
+            }
+            else
+            {
+                Debug.LogError("Failed to load rules to validate.");
+                IsLoadingRuleToValidate = false;
+            }
         }
     }
 }

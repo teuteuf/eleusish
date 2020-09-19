@@ -1070,6 +1070,7 @@ MonoBehaviour:
     'Hearts'].includes(card.Suite)) {\r\n            return 'red';\r\n        } else
     {\r\n            return 'black';\r\n        }\r\n    }\r\n\r\n    return getColor(previousCards[previousCards.length
     - 1]) !== getColor(newCard);\r\n}"
+  gameSave: {fileID: 96714008}
 --- !u!1 &1715086726
 GameObject:
   m_ObjectHideFlags: 0
