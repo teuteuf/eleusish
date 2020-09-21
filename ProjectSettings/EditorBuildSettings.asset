@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AccountScene.unity
     guid: ad4234f5ea824b647a91dc4ea7783fea
+  - enabled: 1
+    path: Assets/Scenes/ValidateScene.unity
+    guid: ba0d1d86be8d1114483b8b207d95be50
   m_configObjects: {}

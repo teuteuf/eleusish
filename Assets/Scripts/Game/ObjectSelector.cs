@@ -7,7 +7,7 @@ namespace Game
     public class ObjectSelector : MonoBehaviour
     {
         private const string TagTable = "Table";
-        
+
         [SerializeField] private float dragDelay = 0.25f;
 
         private Camera _camera;
@@ -86,11 +86,11 @@ namespace Game
             {
                 return;
             }
-            
+
             var currentCursorPos = GetCurrentCursorPosition();
             var cursorWorldPosition = _camera.ScreenToWorldPoint(currentCursorPos) + _draggingOffset;
             var offset = cursorWorldPosition - draggedGameObject.transform.position;
-            
+
             var card = draggedGameObject.GetComponentInParent<Card>();
             if (card)
             {

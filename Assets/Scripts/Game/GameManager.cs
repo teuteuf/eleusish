@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Game.CardComponents;
 using Game.GuessingLineComponents;
@@ -25,7 +24,8 @@ namespace Game
 
         private AbstractRule _activeRule;
 
-        private int nbActions = 0;
+        private int _nbActions = 0;
+        private int _nbErrors = 0;
 
         private void Awake()
         {
@@ -62,18 +62,19 @@ namespace Game
 
         private void PlayCard(Card card)
         {
-            nbActions++;
+            _nbActions++;
             declinedCardLine.PutBackCards();
 
             var isValidCard = _activeRule.IsValid(
                 guessingLine.GetAllValidCards().Select(validCard => validCard.Value).ToArray(),
                 card.Value
             );
-            
+
             MoveCardFromHandToGuessingLine(card, isValidCard);
 
             if (!isValidCard)
             {
+                _nbErrors++;
                 DrawCardsToHand(nbDrawCardOnInvalidCard);
             }
             else if (hand.GetAllCards().Count == 0)
@@ -84,7 +85,7 @@ namespace Game
 
         public void ChooseNoPlay()
         {
-            nbActions++;
+            _nbActions++;
             declinedCardLine.PutBackCards();
 
             var allCardsInHand = hand.GetAllCards();
@@ -99,6 +100,7 @@ namespace Game
 
             if (nbPlayableCards > 0)
             {
+                _nbErrors++;
                 var randomPlayableCard = playableCards[Random.Range(0, nbPlayableCards)];
                 MoveCardFromHandToGuessingLine(randomPlayableCard, true);
                 DrawCardsToHand(nbDrawCardOnWrongNoPlay);
@@ -173,13 +175,29 @@ namespace Game
 
         private void HandleFail()
         {
-            sceneSwitcher.Switch(AvailableScene.Fail);
+            if (gameSave.HasKey(GameSave.SaveKey.ValidationRun) && gameSave.LoadBool(GameSave.SaveKey.ValidationRun))
+            {
+                sceneSwitcher.SwitchToValidate();
+            }
+            else
+            {
+                sceneSwitcher.SwitchToFail();
+            }
         }
 
         private void HandleSuccess()
         {
-            gameSave.Save(GameSave.SaveKey.LastNbActions, nbActions);
-            sceneSwitcher.Switch(AvailableScene.Success);
+            gameSave.Save(GameSave.SaveKey.LastNbActions, _nbActions);
+            gameSave.Save(GameSave.SaveKey.LastNbErrors, _nbErrors);
+
+            if (gameSave.HasKey(GameSave.SaveKey.ValidationRun) && gameSave.LoadBool(GameSave.SaveKey.ValidationRun))
+            {
+                sceneSwitcher.SwitchToValidate();
+            }
+            else
+            {
+                sceneSwitcher.SwitchToSuccess();
+            }
         }
     }
 }

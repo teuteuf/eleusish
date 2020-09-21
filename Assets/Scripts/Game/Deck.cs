@@ -38,7 +38,8 @@ namespace Game
         [CanBeNull]
         public Card PickCard(CardValue value)
         {
-            var pickedCardIndex = _remainingCards.FindIndex(cardValue => cardValue.Rank == value.Rank && cardValue.Suite == value.Suite);
+            var pickedCardIndex = _remainingCards.FindIndex(cardValue =>
+                cardValue.Rank == value.Rank && cardValue.Suite == value.Suite);
             if (pickedCardIndex == -1)
             {
                 return null;
@@ -62,7 +63,7 @@ namespace Game
         private void ResetRemainingCards()
         {
             var allCards = new List<CardValue>();
-            
+
             foreach (var suite in Enum.GetValues(typeof(CardSuite)).Cast<CardSuite>())
             {
                 foreach (var rank in Enum.GetValues(typeof(CardRank)).Cast<CardRank>())

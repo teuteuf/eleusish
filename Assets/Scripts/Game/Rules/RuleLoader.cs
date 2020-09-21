@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Menu;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -9,10 +8,8 @@ namespace Game.Rules
     {
         [SerializeField] private string rulesEndpoint = default;
 
-        [SerializeField] private GameSave gameSave = default;
-
         private static RuleLoader _instance;
-        
+
         public LoadedRule[] LoadedRules { get; private set; }
         public LoadedRule RuleToValidate { get; private set; }
 
@@ -25,17 +22,19 @@ namespace Game.Rules
             {
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
-                
-                StartCoroutine(LoadRules());
-
-                if (gameSave.HasKey(GameSave.SaveKey.PlayerId))
-                {
-                    StartCoroutine(LoadRuleToValidate(gameSave.LoadString(GameSave.SaveKey.PlayerId)));
-                }
             }
             else
             {
-                Destroy(this);
+                Destroy(gameObject);
+            }
+        }
+
+        public void StartLoadingRules(string playerId)
+        {
+            StartCoroutine(LoadRules());
+            if (playerId != null)
+            {
+                StartCoroutine(LoadRuleToValidate(playerId));
             }
         }
 
@@ -51,9 +50,9 @@ namespace Game.Rules
             {
                 var result = request.downloadHandler.text;
                 var loadedRules = JsonUtility.FromJson<LoadedRules>($"{{\"rules\": {result}}}");
-                
+
                 Debug.Log($"Rules loaded. Nb rules: {loadedRules.rules.Length}");
-                
+
                 LoadedRules = loadedRules.rules;
                 IsLoadingRules = false;
             }
@@ -76,9 +75,9 @@ namespace Game.Rules
             {
                 var result = request.downloadHandler.text;
                 var loadedRules = JsonUtility.FromJson<LoadedRules>($"{{\"rules\": {result}}}");
-                
+
                 Debug.Log($"Rules to validate loaded. Nb rules: {loadedRules.rules.Length}");
-                
+
                 RuleToValidate = loadedRules.rules.Length > 0 ? loadedRules.rules[0] : null;
                 IsLoadingRuleToValidate = false;
             }

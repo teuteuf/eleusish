@@ -5,21 +5,28 @@ using UnityEngine.UI;
 
 namespace Menu.Screens
 {
-    
     public class HomeScreen : MonoBehaviour
     {
         [SerializeField] private Button playButton = default;
         [SerializeField] private Text playText = default;
         [SerializeField] private Button validateButton = default;
         [SerializeField] private Text validateText = default;
-        
-        [SerializeField] private RuleLoader ruleLoader = default;
 
         [SerializeField] private SceneSwitcher sceneSwitcher = default;
         [SerializeField] private GameSave gameSave = default;
 
+        private RuleLoader _ruleLoader;
+
         private void Start()
         {
+            _ruleLoader = FindObjectOfType<RuleLoader>();
+
+            _ruleLoader.StartLoadingRules(
+                gameSave.HasKey(GameSave.SaveKey.PlayerId)
+                    ? gameSave.LoadString(GameSave.SaveKey.PlayerId)
+                    : null
+            );
+
             StartCoroutine(ManagePlayButton());
             StartCoroutine(ManageValidateButton());
         }
@@ -28,7 +35,7 @@ namespace Menu.Screens
         {
             gameSave.Save(GameSave.SaveKey.ValidationRun, false);
             sceneSwitcher.SwitchToGame();
-        } 
+        }
 
         public void StartValidation()
         {
@@ -39,11 +46,11 @@ namespace Menu.Screens
         private IEnumerator ManagePlayButton()
         {
             var originalPlayTextValue = playText.text;
-            
+
             playButton.interactable = false;
             playText.text = "Loading...";
-            
-            yield return new WaitWhile(() => ruleLoader.IsLoadingRules);
+
+            yield return new WaitWhile(() => _ruleLoader.IsLoadingRules);
 
             playButton.interactable = true;
             playText.text = originalPlayTextValue;
@@ -52,13 +59,13 @@ namespace Menu.Screens
         private IEnumerator ManageValidateButton()
         {
             var originalValidateTextValue = validateText.text;
-            
+
             validateButton.interactable = false;
             validateText.text = "Loading...";
-            
-            yield return new WaitWhile(() => ruleLoader.IsLoadingRuleToValidate);
 
-            validateButton.interactable = ruleLoader.RuleToValidate != null;
+            yield return new WaitWhile(() => _ruleLoader.IsLoadingRuleToValidate);
+
+            validateButton.interactable = _ruleLoader.RuleToValidate != null;
             validateText.text = originalValidateTextValue;
         }
     }

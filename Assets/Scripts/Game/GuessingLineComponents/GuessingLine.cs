@@ -7,7 +7,7 @@ namespace Game.GuessingLineComponents
     public class GuessingLine : MonoBehaviour
     {
         [SerializeField] private CardSlot prefabCardSlot = default;
-        
+
         [SerializeField] private float spaceBetweenCardSlots = 0.5f;
         [SerializeField] private float horizontalViewportPadding = 0.15f;
 
@@ -18,11 +18,12 @@ namespace Game.GuessingLineComponents
         private void Awake()
         {
             _camera = Camera.main;
-            
+
             if (!_currentCardSlot)
             {
                 var originTransform = transform;
-                _currentCardSlot = Instantiate(prefabCardSlot, originTransform.position, originTransform.rotation, originTransform);
+                _currentCardSlot = Instantiate(prefabCardSlot, originTransform.position, originTransform.rotation,
+                    originTransform);
             }
         }
 
@@ -52,7 +53,7 @@ namespace Game.GuessingLineComponents
                     currentCardSlotRotation,
                     transform
                 );
-                
+
                 var viewportCardPosition = _camera.WorldToViewportPoint(card.transform.position);
                 if (1 - viewportCardPosition.x < horizontalViewportPadding)
                 {

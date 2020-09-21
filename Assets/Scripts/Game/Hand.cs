@@ -9,7 +9,7 @@ namespace Game
     public class Hand : MonoBehaviour
     {
         [SerializeField] private CardsOrganizer cardsOrganizer = default;
-        
+
         private readonly List<Card> _cards = new List<Card>();
 
         public IList<Card> GetAllCards() => _cards.AsReadOnly();

@@ -9,7 +9,7 @@ namespace Game
     public class DeclinedCardLine : MonoBehaviour
     {
         [SerializeField] private CardsOrganizer cardsOrganizer = default;
-        
+
         private CardSlot _shownCardSlot;
         private List<Card> _declinedCards;
 
@@ -23,7 +23,7 @@ namespace Game
         public void ShowCardSlotContent(CardSlot cardSlot)
         {
             PutBackCards();
-            
+
             var invalidCards = cardSlot.WithdrawInvalidCards();
 
             invalidCards.ForEach(card => card.transform.parent = transform);
@@ -38,9 +38,9 @@ namespace Game
             if (_shownCardSlot)
             {
                 transform.position = _originalLinePosition;
-                
+
                 _declinedCards.ForEach(card => _shownCardSlot.PlaceCard(card, false));
-                
+
                 _declinedCards = null;
                 _shownCardSlot = null;
             }

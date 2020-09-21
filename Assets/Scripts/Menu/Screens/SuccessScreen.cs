@@ -1,11 +1,9 @@
-﻿using System;
-using Menu;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Prefabs.Menu.Canvas
+namespace Menu.Screens
 {
-    public class SuccessCanvas : MonoBehaviour
+    public class SuccessScreen : MonoBehaviour
     {
         [SerializeField] private GameSave gameSave = default;
         [SerializeField] private Text textNbLastActions = default;

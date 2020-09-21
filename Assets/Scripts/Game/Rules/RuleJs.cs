@@ -13,12 +13,10 @@ namespace Game.Rules
 {
     public class RuleJs : AbstractRule
     {
-        [TextArea(10, 20)]
-        [SerializeField]
-        private string defaultJsRule = default;
+        [TextArea(10, 20)] [SerializeField] private string defaultJsRule = default;
 
         [SerializeField] private GameSave gameSave = default;
-        
+
         private Engine _jintEngine;
         private JsValue _getInitialCards;
         private JsValue _isValid;
@@ -26,7 +24,8 @@ namespace Game.Rules
         private void Awake()
         {
             var ruleLoader = FindObjectOfType<RuleLoader>();
-            var hasLoadedRules = ruleLoader != null && ruleLoader.LoadedRules != null && ruleLoader.LoadedRules.Length > 0;
+            var hasLoadedRules = ruleLoader != null && ruleLoader.LoadedRules != null &&
+                                 ruleLoader.LoadedRules.Length > 0;
             var hasRuleToValidate = ruleLoader != null && ruleLoader.RuleToValidate != null;
             var isValidationRun = gameSave.LoadBool(GameSave.SaveKey.ValidationRun);
 

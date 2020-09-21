@@ -7,6 +7,7 @@ namespace Menu
         public enum SaveKey
         {
             LastNbActions,
+            LastNbErrors,
             PlayerPseudo,
             PlayerId,
             ValidationRun
