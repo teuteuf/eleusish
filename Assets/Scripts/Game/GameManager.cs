@@ -175,6 +175,9 @@ namespace Game
 
         private void HandleFail()
         {
+            gameSave.Save(GameSave.SaveKey.LastNbActions, _nbActions);
+            gameSave.Save(GameSave.SaveKey.LastNbErrors, _nbErrors);
+            
             if (gameSave.HasKey(GameSave.SaveKey.ValidationRun) && gameSave.LoadBool(GameSave.SaveKey.ValidationRun))
             {
                 sceneSwitcher.SwitchToValidate();
