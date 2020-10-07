@@ -5,6 +5,7 @@ using Game.CardComponents;
 using JetBrains.Annotations;
 using Jint;
 using Jint.Native;
+using Jint.Native.Array;
 using Menu;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -56,8 +57,17 @@ namespace Game.Rules
         {
             var remainingCardsForJs = remainingCards.Select(SerializeCardValueForJs).ToArray();
 
-            var initialCardValuesForJs = _getInitialCards
-                .Invoke(JsValue.FromObject(_jintEngine, remainingCardsForJs)).AsArray();
+            ArrayInstance initialCardValuesForJs;
+            try
+            {
+                initialCardValuesForJs = _getInitialCards
+                    .Invoke(JsValue.FromObject(_jintEngine, remainingCardsForJs)).AsArray();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+                return new List<CardValue>();
+            }
 
             var initialCardValues = new List<CardValue>();
             foreach (var value in initialCardValuesForJs)
@@ -79,10 +89,21 @@ namespace Game.Rules
             var previousCardsForJs = previousCards.Select(SerializeCardValueForJs).ToArray();
             var newCardForJs = SerializeCardValueForJs(newCard);
 
-            return _isValid.Invoke(
-                JsValue.FromObject(_jintEngine, previousCardsForJs),
-                JsValue.FromObject(_jintEngine, newCardForJs)
-            ).AsBoolean();
+            bool valid;
+            try
+            {
+                valid = _isValid.Invoke(
+                    JsValue.FromObject(_jintEngine, previousCardsForJs),
+                    JsValue.FromObject(_jintEngine, newCardForJs)
+                ).AsBoolean();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+                return false;
+            }
+            
+            return valid;
         }
 
 
