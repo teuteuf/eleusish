@@ -129,7 +129,7 @@ namespace Game
         {
             if (card.transform.IsChildOf(hand.transform))
             {
-                hand.transform.position += Vector3.right * offset.x;
+                hand.DragHand(Vector3.right * offset.x);
             }
             else if (card.transform.IsChildOf(declinedCardLine.transform))
             {

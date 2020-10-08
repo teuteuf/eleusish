@@ -26,5 +26,11 @@ namespace Game
             _cards.Remove(card);
             cardsOrganizer.Organize(_cards);
         }
+
+        public void DragHand(Vector3 offset)
+        {
+            transform.position += Vector3.right * offset.x;
+            cardsOrganizer.Organize(_cards,false);
+        }
     }
 }
