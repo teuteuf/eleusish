@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c13fa55bcc64a94f96f63b120844342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragDelay: 0.25
+  dragDelay: 0.2
 --- !u!114 &1404435668
 MonoBehaviour:
   m_ObjectHideFlags: 0
