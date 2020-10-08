@@ -129,11 +129,11 @@ namespace Game
         {
             if (card.transform.IsChildOf(hand.transform))
             {
-                hand.DragHand(Vector3.right * offset.x);
+                hand.DragHand(offset);
             }
             else if (card.transform.IsChildOf(declinedCardLine.transform))
             {
-                declinedCardLine.transform.position += Vector3.right * offset.x;
+                declinedCardLine.DragLine(offset);
             }
             else if (card.transform.IsChildOf(guessingLine.transform))
             {

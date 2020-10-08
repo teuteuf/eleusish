@@ -45,5 +45,11 @@ namespace Game
                 _shownCardSlot = null;
             }
         }
+
+        public void DragLine(Vector3 offset)
+        {
+           transform.position += Vector3.right * offset.x;
+           cardsOrganizer.Organize(_declinedCards,false);
+        }
     }
 }
