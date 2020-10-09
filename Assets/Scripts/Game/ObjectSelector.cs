@@ -15,8 +15,8 @@ namespace Game
 
         private float _timeClickDown;
         private GameObject _draggedGameObject;
-        private Vector3 _startDraggingScreenPoint;
-        private Vector3 _draggingOffset;
+        private Vector3 _startDraggedGameObjectScreenPoint;
+        private Vector3 _lastDraggingWorldPoint;
 
         private void Awake()
         {
@@ -63,21 +63,16 @@ namespace Game
             }
         }
 
-        private void HandleStartDragging(GameObject startDraggingGameObject)
+        private void HandleStartDragging(GameObject draggedGameObject)
         {
-            _draggedGameObject = startDraggingGameObject;
-
-            var draggedPosition = startDraggingGameObject.transform.position;
-
-            _startDraggingScreenPoint = _camera.WorldToScreenPoint(draggedPosition);
-
-            var cursorPosition = GetCurrentCursorPosition();
-            _draggingOffset = draggedPosition - _camera.ScreenToWorldPoint(cursorPosition);
+            _draggedGameObject = draggedGameObject;
+            _startDraggedGameObjectScreenPoint = _camera.WorldToScreenPoint(draggedGameObject.transform.position);
+            _lastDraggingWorldPoint = _camera.ScreenToWorldPoint(GetCurrentCursorPosition());
         }
 
         private Vector3 GetCurrentCursorPosition()
         {
-            return new Vector3(Input.mousePosition.x, Input.mousePosition.y, _startDraggingScreenPoint.z);
+            return new Vector3(Input.mousePosition.x, Input.mousePosition.y, _startDraggedGameObjectScreenPoint.z);
         }
 
         private void HandleDraggedGameObject(GameObject draggedGameObject)
@@ -88,8 +83,8 @@ namespace Game
             }
 
             var currentCursorPos = GetCurrentCursorPosition();
-            var cursorWorldPosition = _camera.ScreenToWorldPoint(currentCursorPos) + _draggingOffset;
-            var offset = cursorWorldPosition - draggedGameObject.transform.position;
+            var cursorWorldPosition = _camera.ScreenToWorldPoint(currentCursorPos);
+            var offset = cursorWorldPosition  - _lastDraggingWorldPoint;
 
             var card = draggedGameObject.GetComponentInParent<Card>();
             if (card)
@@ -101,6 +96,8 @@ namespace Game
             {
                 _gameManager.DragTable(offset);
             }
+
+            _lastDraggingWorldPoint = cursorWorldPosition;
         }
 
         [CanBeNull]
