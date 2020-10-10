@@ -12,6 +12,12 @@ namespace Game
 
         private CardSlot _shownCardSlot;
         private List<Card> _declinedCards;
+        private Vector3 _startingLocalPosition;
+
+        private void Awake()
+        {
+            _startingLocalPosition = transform.localPosition;
+        }
 
         public void ShowCardSlotContent(CardSlot cardSlot)
         {
@@ -35,6 +41,8 @@ namespace Game
                 _declinedCards = null;
                 _shownCardSlot = null;
             }
+
+            transform.localPosition = _startingLocalPosition;
         }
 
         public void DragLine(Vector3 offset)
