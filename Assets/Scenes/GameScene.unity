@@ -315,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 2277920792567248643, guid: f105dd8e9a6d2604284c27af3fa3f7f8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2277920792567248643, guid: f105dd8e9a6d2604284c27af3fa3f7f8,
         type: 3}
@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -595,10 +596,24 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1715086727}
+  - {fileID: 1255678394}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7246838baab44a84b5f14b4239729d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1001679920
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,12 +871,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255678393}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 2.5000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1255678395
 MonoBehaviour:
@@ -922,6 +937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabCardSlot: {fileID: 760817114935225423, guid: 38699c22e5027f04d999129978e6e43d,
     type: 3}
+  cameraManager: {fileID: 963194229}
   spaceBetweenCardSlots: 0.725
   horizontalViewportPadding: 0.15
 --- !u!4 &1396643391
@@ -1022,6 +1038,7 @@ MonoBehaviour:
   hand: {fileID: 1715086728}
   guessingLine: {fileID: 1396643390}
   declinedCardLine: {fileID: 1255678395}
+  cameraManager: {fileID: 963194229}
   startHandSize: 14
   nbDrawCardOnInvalidCard: 2
   nbDrawCardOnWrongNoPlay: 5
@@ -1097,12 +1114,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715086726}
-  m_LocalRotation: {x: -0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 0.4, z: -1}
+  m_LocalRotation: {x: -0.76604444, y: -0, z: -0, w: 0.6427876}
+  m_LocalPosition: {x: 0, y: -1, z: 3.6000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -10, y: 0, z: 0}
 --- !u!114 &1715086728
 MonoBehaviour:
@@ -1365,7 +1382,7 @@ PrefabInstance:
     - target: {fileID: 5616029959518250871, guid: c8276c7e3c7608b4094f4090be468be7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5616029959518250871, guid: c8276c7e3c7608b4094f4090be468be7,
         type: 3}
