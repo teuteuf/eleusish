@@ -67,16 +67,17 @@ namespace Game
         private void HandleStartDragging(GameObject draggedGameObject)
         {
             var draggedObjectPosition = draggedGameObject.transform.position;
-            var currentCursorPosition = GetCurrentCursorPosition();
             _draggedGameObject = draggedGameObject;
             _startDraggedGameObjectScreenPoint = _camera.WorldToScreenPoint(draggedObjectPosition);
+            
+            var currentCursorPosition = GetCurrentCursorPosition(_startDraggedGameObjectScreenPoint.z);
             _lastDraggingWorldPoint = _camera.ScreenToWorldPoint(currentCursorPosition);
             _draggingOffset = draggedObjectPosition - _camera.ScreenToWorldPoint(currentCursorPosition);
         }
 
-        private Vector3 GetCurrentCursorPosition()
+        private Vector3 GetCurrentCursorPosition(float zValue)
         {
-            return new Vector3(Input.mousePosition.x, Input.mousePosition.y, _startDraggedGameObjectScreenPoint.z);
+            return new Vector3(Input.mousePosition.x, Input.mousePosition.y, zValue);
         }
 
         private void HandleDraggedGameObject(GameObject draggedGameObject)
@@ -86,7 +87,7 @@ namespace Game
                 return;
             }
 
-            var currentCursorPos = GetCurrentCursorPosition();
+            var currentCursorPos = GetCurrentCursorPosition(_startDraggedGameObjectScreenPoint.z);
             var cursorWorldPosition = _camera.ScreenToWorldPoint(currentCursorPos);
             
             var relativeOffset = cursorWorldPosition  - _lastDraggingWorldPoint;
