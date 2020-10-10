@@ -17,6 +17,7 @@ namespace Game
         private GameObject _draggedGameObject;
         private Vector3 _startDraggedGameObjectScreenPoint;
         private Vector3 _lastDraggingWorldPoint;
+        private Vector3 _draggingOffset;
 
         private void Awake()
         {
@@ -65,9 +66,12 @@ namespace Game
 
         private void HandleStartDragging(GameObject draggedGameObject)
         {
+            var draggedObjectPosition = draggedGameObject.transform.position;
+            var currentCursorPosition = GetCurrentCursorPosition();
             _draggedGameObject = draggedGameObject;
-            _startDraggedGameObjectScreenPoint = _camera.WorldToScreenPoint(draggedGameObject.transform.position);
-            _lastDraggingWorldPoint = _camera.ScreenToWorldPoint(GetCurrentCursorPosition());
+            _startDraggedGameObjectScreenPoint = _camera.WorldToScreenPoint(draggedObjectPosition);
+            _lastDraggingWorldPoint = _camera.ScreenToWorldPoint(currentCursorPosition);
+            _draggingOffset = draggedObjectPosition - _camera.ScreenToWorldPoint(currentCursorPosition);
         }
 
         private Vector3 GetCurrentCursorPosition()
@@ -84,17 +88,19 @@ namespace Game
 
             var currentCursorPos = GetCurrentCursorPosition();
             var cursorWorldPosition = _camera.ScreenToWorldPoint(currentCursorPos);
-            var offset = cursorWorldPosition  - _lastDraggingWorldPoint;
+            
+            var relativeOffset = cursorWorldPosition  - _lastDraggingWorldPoint;
+            var worldOffset = cursorWorldPosition + _draggingOffset - draggedGameObject.transform.position;
 
             var card = draggedGameObject.GetComponentInParent<Card>();
             if (card)
             {
-                _gameManager.DragCard(card, offset);
+                _gameManager.DragCard(card, worldOffset, relativeOffset);
             }
 
             if (draggedGameObject.CompareTag(TagTable))
             {
-                _gameManager.DragTable(offset);
+                _gameManager.DragTable(worldOffset);
             }
 
             _lastDraggingWorldPoint = cursorWorldPosition;

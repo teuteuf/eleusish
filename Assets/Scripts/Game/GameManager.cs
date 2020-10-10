@@ -16,6 +16,7 @@ namespace Game
         [SerializeField] private Hand hand = default;
         [SerializeField] private GuessingLine guessingLine = default;
         [SerializeField] private DeclinedCardLine declinedCardLine = default;
+        [SerializeField] private CameraManager cameraManager = default;
 
         [SerializeField] private int startHandSize = 3;
         [SerializeField] private int nbDrawCardOnInvalidCard = 2;
@@ -125,25 +126,25 @@ namespace Game
             }
         }
 
-        public void DragCard(Card card, Vector3 offset)
+        public void DragCard(Card card, Vector3 worldOffset, Vector3 relativeOffset)
         {
             if (card.transform.IsChildOf(hand.transform))
             {
-                hand.DragHand(offset);
+                hand.DragHand(relativeOffset);
             }
             else if (card.transform.IsChildOf(declinedCardLine.transform))
             {
-                declinedCardLine.DragLine(offset);
+                declinedCardLine.DragLine(relativeOffset);
             }
             else if (card.transform.IsChildOf(guessingLine.transform))
             {
-                DragPlayground(offset);
+                DragPlayground(worldOffset);
             }
         }
 
-        public void DragTable(Vector3 offset)
+        public void DragTable(Vector3 worldOffset)
         {
-            DragPlayground(offset);
+            DragPlayground(worldOffset);
         }
 
         private void MoveCardFromHandToGuessingLine(Card card, bool isValidCard)
@@ -170,7 +171,7 @@ namespace Game
 
         private void DragPlayground(Vector3 offset)
         {
-            guessingLine.transform.parent.position += Vector3.right * offset.x;
+            cameraManager.Move(Vector3.left * offset.x);
         }
 
         private void HandleFail()
