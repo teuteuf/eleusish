@@ -7,7 +7,7 @@ namespace Game.GuessingLineComponents
     public class CardSlot : MonoBehaviour
     {
         [SerializeField] private float spaceBetweenInvalidCards = 0.5f;
-        [SerializeField] private float spaceBetweenInvalidAndValidCards = 0.5f;
+        [SerializeField] private Vector2 spaceBetweenInvalidAndValidCards = new Vector2(0.0F, 1.0f);
         [SerializeField] private float randomRotationAngle = 5.0f;
 
         public Card ValidCard { get; private set; }
@@ -55,9 +55,9 @@ namespace Game.GuessingLineComponents
 
             var cardRotation = currentCardSlotTransform.rotation * Quaternion.AngleAxis(180.0f, Vector3.forward);
             var cardPosition = new Vector3(
-                currentCardSlotPosition.x,
+                currentCardSlotPosition.x + spaceBetweenInvalidAndValidCards.x,
                 currentCardSlotPosition.y + nbOffset * 0.001f,
-                currentCardSlotPosition.z + spaceBetweenInvalidAndValidCards + spaceBetweenInvalidCards * nbOffset
+                currentCardSlotPosition.z + spaceBetweenInvalidAndValidCards.y + spaceBetweenInvalidCards * nbOffset
             );
 
             cardTransform.parent = currentCardSlotTransform;

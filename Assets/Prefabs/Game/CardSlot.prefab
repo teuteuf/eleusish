@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceBetweenInvalidCards: 0.1
-  spaceBetweenInvalidAndValidCards: 0.95
+  spaceBetweenInvalidAndValidCards: {x: -0.3625, y: 0.95}
   randomRotationAngle: 2
