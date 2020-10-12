@@ -5,12 +5,14 @@ namespace Game.CardComponents
 {
     public class Card : MonoBehaviour
     {
+        [SerializeField] private float rotationSpeed = 180.0f;
         [SerializeField] private float moveSpeed = 10.0f;
         [SerializeField] private float maxMoveDuration = 0.5f;
         
         public CardValue Value { get; private set; }
         
         private CardVisual _cardVisual;
+        private Quaternion? _targetRotation;
         private Vector3? _targetPosition;
         private float _actualMoveSpeed;
 
@@ -23,9 +25,8 @@ namespace Game.CardComponents
         {
             if (_targetPosition != null)
             {
-                var transformPosition = transform.position;
                 transform.position = Vector3.MoveTowards(
-                    transformPosition,
+                    transform.position,
                     (Vector3) _targetPosition,
                     Time.deltaTime * _actualMoveSpeed
                 );
@@ -33,6 +34,20 @@ namespace Game.CardComponents
                 if (transform.position == _targetPosition)
                 {
                     _targetPosition = null;
+                }
+            }
+
+            if (_targetRotation != null)
+            {
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    (Quaternion) _targetRotation,
+                    Time.deltaTime * rotationSpeed
+                );
+
+                if (transform.rotation == _targetRotation)
+                {
+                    _targetRotation = null;
                 }
             }
         }
@@ -51,9 +66,9 @@ namespace Game.CardComponents
             var speedForMaxMoveDuration = distance / maxMoveDuration;
             
             _actualMoveSpeed = Mathf.Max(moveSpeed, speedForMaxMoveDuration);
-
+            
             _targetPosition = position;
-            cardTransform.rotation = rotation;
+            _targetRotation = rotation;
         }
     }
 }
