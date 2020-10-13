@@ -36,19 +36,20 @@ namespace Game
 
         public void Move(Vector3 position, bool instant, [CanBeNull] Action onMove)
         {
-            
-            var distance = Vector3.Distance(transform.position, position);
-            var speedForMaxMoveDuration = distance / maxMoveDuration;
-            
-            _actualMoveSpeed = Mathf.Max(moveSpeed, speedForMaxMoveDuration);
-            
-            _targetPosition = position;
-
-            _onMove = onMove;
-
             if (instant)
             {
-                transform.position = (Vector3) _targetPosition;
+                _targetPosition = null;
+                transform.position = position;
+                onMove?.Invoke();
+            }
+            else 
+            {
+                var distance = Vector3.Distance(transform.position, position);
+                var speedForMaxMoveDuration = distance / maxMoveDuration;
+            
+                _actualMoveSpeed = Mathf.Max(moveSpeed, speedForMaxMoveDuration);
+                _targetPosition = position;
+                _onMove = onMove;
             }
         }
     }
