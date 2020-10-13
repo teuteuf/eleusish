@@ -9,11 +9,13 @@ namespace Game
         private const string TagTable = "Table";
 
         [SerializeField] private float dragDelay = 0.25f;
+        [SerializeField] private float dragDistance = 20;
 
         private Camera _camera;
         private GameManager _gameManager;
 
         private float _timeClickDown;
+        private Vector3 _positionClickDown;
         private GameObject _draggedGameObject;
         private Vector3 _startDraggedGameObjectScreenPoint;
         private Vector3 _lastDraggingWorldPoint;
@@ -31,6 +33,7 @@ namespace Game
             if (Input.GetMouseButtonDown(0))
             {
                 _timeClickDown = Time.time;
+                _positionClickDown = Input.mousePosition;
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -110,7 +113,12 @@ namespace Game
         [CanBeNull]
         private GameObject GetGameObjectSelectedByClick()
         {
-            if (!_camera || !Input.GetMouseButtonUp(0) || Time.time - _timeClickDown > dragDelay)
+            if (
+                !_camera
+                || !Input.GetMouseButtonUp(0)
+                || Time.time - _timeClickDown > dragDelay
+                || Vector3.Distance(_positionClickDown, Input.mousePosition) > dragDistance
+            )
             {
                 return null;
             }
