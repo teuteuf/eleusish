@@ -171,7 +171,7 @@ namespace Game
 
         private void DragPlayground(Vector3 offset)
         {
-            cameraManager.Move(Vector3.left * offset.x);
+            cameraManager.Move(Vector3.left * offset.x, true);
         }
 
         private void HandleFail()

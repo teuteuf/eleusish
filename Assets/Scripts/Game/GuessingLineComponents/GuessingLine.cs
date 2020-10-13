@@ -55,7 +55,7 @@ namespace Game.GuessingLineComponents
                 var viewportSlotPosition = cameraManager.GetViewportPoint(currentCardSlotPosition);
                 if (1 - viewportSlotPosition.x < horizontalViewportPadding)
                 {
-                    cameraManager.Move(Vector3.right * spaceBetweenCardSlots);
+                    cameraManager.Move(Vector3.right * spaceBetweenCardSlots, false);
                 }
             }
         }
