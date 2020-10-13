@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 4274627657826538377}
   - component: {fileID: 4274627657826538382}
   - component: {fileID: 9175328975553429987}
+  - component: {fileID: -5366390192522497274}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -540,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mover: {fileID: 9175328975553429987}
-  rotationSpeed: 720
+  rotator: {fileID: -5366390192522497274}
 --- !u!114 &9175328975553429987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,3 +556,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   maxMoveDuration: 0.75
+--- !u!114 &-5366390192522497274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274627657826538379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81997db33e034d32955a5d1bd028388b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 720
