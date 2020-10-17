@@ -34,7 +34,10 @@ namespace Game.Rules
             string jsRule;
             if (!isValidationRun && hasLoadedRules)
             {
-                jsRule = ruleLoader.LoadedRules[Random.Range(0, ruleLoader.LoadedRules.Length)].code;
+                var randomRule = ruleLoader.LoadedRules[Random.Range(0, ruleLoader.LoadedRules.Length)];
+                jsRule = gameSave.HasKey(GameSave.SaveKey.SelectedRule)
+                    ? ruleLoader.LoadedRules.First(rule => rule.id == gameSave.LoadString(GameSave.SaveKey.SelectedRule)).code
+                    : randomRule.code;
             }
             else if (isValidationRun && hasRuleToValidate)
             {

@@ -10,7 +10,8 @@ namespace Menu
             LastNbErrors,
             PlayerPseudo,
             PlayerId,
-            ValidationRun
+            ValidationRun,
+            SelectedRule
         }
 
         public void Save(SaveKey saveKey, int value) => PlayerPrefs.SetInt(saveKey.ToString(), value);

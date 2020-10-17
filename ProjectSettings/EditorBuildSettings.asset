@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ValidateScene.unity
     guid: ba0d1d86be8d1114483b8b207d95be50
+  - enabled: 1
+    path: Assets/Scenes/SelectRuleScene.unity
+    guid: 368b9067d644efe4faefd8587e906cfe
   m_configObjects: {}

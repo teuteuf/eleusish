@@ -7,6 +7,7 @@ namespace Menu
     public enum AvailableScene
     {
         Home,
+        SelectRule,
         Game,
         Success,
         Fail,
@@ -17,6 +18,7 @@ namespace Menu
     public class SceneSwitcher : MonoBehaviour
     {
         public void SwitchToHome() => Switch(AvailableScene.Home);
+        public void SwitchToSelectRule() => Switch(AvailableScene.SelectRule);
         public void SwitchToGame() => Switch(AvailableScene.Game);
         public void SwitchToSuccess() => Switch(AvailableScene.Success);
         public void SwitchToFail() => Switch(AvailableScene.Fail);
@@ -29,6 +31,9 @@ namespace Menu
             {
                 case AvailableScene.Home:
                     SceneManager.LoadScene("HomeScene");
+                    break;
+                case AvailableScene.SelectRule:
+                    SceneManager.LoadScene("SelectRuleScene");
                     break;
                 case AvailableScene.Game:
                     SceneManager.LoadScene("GameScene");

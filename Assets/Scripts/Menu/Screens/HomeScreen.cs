@@ -34,7 +34,7 @@ namespace Menu.Screens
         public void StartPlay()
         {
             gameSave.Save(GameSave.SaveKey.ValidationRun, false);
-            sceneSwitcher.SwitchToGame();
+            sceneSwitcher.SwitchToSelectRule();
         }
 
         public void StartValidation()

@@ -9,8 +9,16 @@ namespace Game.Rules
         [SerializeField] private string rulesEndpoint = default;
 
         private static RuleLoader _instance;
+        
+        public LoadedRule[] LoadedRules { get; private set; } = {
+            new LoadedRule()
+            {
+                id = "defaultRule",
+                code = "function getInitialCards (remainingCards) { return []; }; function isValid (previousCards, newCard) { return true; };",
+                validated = true
+            }
+        };
 
-        public LoadedRule[] LoadedRules { get; private set; }
         public LoadedRule RuleToValidate { get; private set; }
 
         public bool IsLoadingRules { get; private set; } = false;
@@ -25,7 +33,7 @@ namespace Game.Rules
             }
             else
             {
-                Destroy(gameObject);
+                DestroyImmediate(gameObject);
             }
         }
 

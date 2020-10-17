@@ -121,51 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &146845747
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 146845749}
-  - component: {fileID: 146845748}
-  m_Layer: 0
-  m_Name: RuleLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &146845748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146845747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a0196b7f08b16468f409428c7f2ca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rulesEndpoint: https://eleusish-api.herokuapp.com/api/v1/rules
-  gameSave: {fileID: 1726954186}
---- !u!4 &146845749
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146845747}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191136709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,7 +1057,6 @@ MonoBehaviour:
   playText: {fileID: 270029874}
   validateButton: {fileID: 269602889}
   validateText: {fileID: 2076144410}
-  ruleLoader: {fileID: 146845748}
   sceneSwitcher: {fileID: 972989853}
   gameSave: {fileID: 1726954186}
 --- !u!1 &1890930074
@@ -1313,6 +1267,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076144408}
   m_CullTransparentMesh: 0
+--- !u!1001 &1322916956230525085
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530344, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322916956100530350, guid: 751eb72ab03abe6409d7c4a0a05a69f8,
+        type: 3}
+      propertyPath: m_Name
+      value: RuleLoader
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 751eb72ab03abe6409d7c4a0a05a69f8, type: 3}
 --- !u!1001 &2277920792954851997
 PrefabInstance:
   m_ObjectHideFlags: 0
