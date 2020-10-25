@@ -21,7 +21,7 @@ namespace Menu.Screens.SelectRuleScreen
             foreach (var loadedRule in _ruleLoader.LoadedRules)
             {
                 var selectRuleButton = Instantiate(selectRuleButtonPrefab, selectRuleButtonList.transform);
-                selectRuleButton.Set(loadedRule.id, () =>
+                selectRuleButton.Set(loadedRule, () =>
                 {
                     gameSave.Save(GameSave.SaveKey.SelectedRule, loadedRule.id);
                     sceneSwitcher.SwitchToGame();

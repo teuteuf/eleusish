@@ -1,4 +1,5 @@
 using System;
+using Game.Rules;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +11,12 @@ namespace Menu.Screens.SelectRuleScreen
         
         private Action _onClick;
 
-        public void Set(string ruleId, Action onClick)
+        public void Set(LoadedRule loadedRule, Action onClick)
         {
             _onClick = onClick;
-            buttonText.text = $"Rule: {ruleId}";
+            buttonText.text = 
+                $"Rule of {loadedRule.ruleName.godName}, {new String('I', loadedRule.ruleName.number)}\n" +
+                $"Transcribed by {loadedRule.author.pseudo}";
         }
 
         public void OnClick()

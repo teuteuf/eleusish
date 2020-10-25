@@ -9,13 +9,23 @@ namespace Game.Rules
         [SerializeField] private string rulesEndpoint = default;
 
         private static RuleLoader _instance;
-        
-        public LoadedRule[] LoadedRules { get; private set; } = {
+
+        public LoadedRule[] LoadedRules { get; private set; } =
+        {
             new LoadedRule()
             {
                 id = "defaultRule",
                 code = "function getInitialCards (remainingCards) { return []; }; function isValid (previousCards, newCard) { return true; };",
-                validated = true
+                validated = true,
+                author = new Author()
+                {
+                    pseudo = "default pseudo"
+                },
+                ruleName = new RuleName()
+                {
+                    godName = "default god",
+                    number = 2
+                }
             }
         };
 
