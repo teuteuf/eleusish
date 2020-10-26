@@ -17,6 +17,7 @@ namespace Game
         [SerializeField] private GuessingLine guessingLine = default;
         [SerializeField] private DeclinedCardLine declinedCardLine = default;
         [SerializeField] private CameraManager cameraManager = default;
+        [SerializeField] private ProgressSave progressSave = default;
 
         [SerializeField] private int startHandSize = 3;
         [SerializeField] private int nbDrawCardOnInvalidCard = 2;
@@ -200,6 +201,12 @@ namespace Game
             }
             else
             {
+                progressSave.UpdateRuleProgress(
+                    gameSave.LoadString(GameSave.SaveKey.SelectedRule),
+                    _nbErrors == 0
+                        ? RuleProgress.PerfectSuccess
+                        : RuleProgress.SuccessWithError
+                );
                 sceneSwitcher.SwitchToSuccess();
             }
         }
