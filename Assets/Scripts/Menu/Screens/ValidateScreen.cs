@@ -54,6 +54,8 @@ namespace Menu.Screens
             request.method = "PATCH";
 
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Player-ID", gameSave.LoadString(GameSave.SaveKey.PlayerId));
+            request.SetRequestHeader("API-Key", Env.APIKey);
 
             yield return request.SendWebRequest();
 
