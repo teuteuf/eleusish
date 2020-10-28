@@ -14,7 +14,7 @@ namespace Game
         private Progress _progress;
         private BinaryFormatter _binaryFormatter;
 
-        private void Start()
+        private void Awake()
         {
             _binaryFormatter = new BinaryFormatter();
             
