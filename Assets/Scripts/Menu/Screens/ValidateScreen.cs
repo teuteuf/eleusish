@@ -44,7 +44,8 @@ namespace Menu.Screens
 
             var body = new ValidateRuleBody
             {
-                validated = true
+                validated = true,
+                code = ruleToValidate.code
             };
 
             var request = UnityWebRequest.Put(
@@ -77,6 +78,8 @@ namespace Menu.Screens
         {
             // ReSharper disable once InconsistentNaming
             public bool validated;
+            // ReSharper disable once InconsistentNaming
+            public string code;
         }
     }
 }
