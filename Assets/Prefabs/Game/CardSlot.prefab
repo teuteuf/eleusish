@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741d861511de4a04b092d46bf839d135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disabledParticles: {fileID: 3311771459045098040}
+  discardedParticles: {fileID: 3311771459045098040}
   spaceBetweenInvalidCards: 0.1
   spaceBetweenInvalidAndValidCards: {x: -0.3625, y: 0.95}
   randomRotationAngle: 2

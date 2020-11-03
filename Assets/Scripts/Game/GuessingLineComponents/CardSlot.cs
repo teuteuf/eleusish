@@ -8,7 +8,7 @@ namespace Game.GuessingLineComponents
 {
     public class CardSlot : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem disabledParticles = default;
+        [SerializeField] private ParticleSystem discardedParticles = default;
 
         [SerializeField] private float spaceBetweenInvalidCards = 0.5f;
         [SerializeField] private Vector2 spaceBetweenInvalidAndValidCards = new Vector2(0.0F, 1.0f);
@@ -17,11 +17,6 @@ namespace Game.GuessingLineComponents
         public Card ValidCard { get; private set; }
 
         private List<Card> _invalidCards = new List<Card>();
-
-        private void Start()
-        {
-            disabledParticles.Stop();
-        }
 
         public void PlaceCard(Card card, bool respectRule)
         {
@@ -39,7 +34,8 @@ namespace Game.GuessingLineComponents
 
         public List<Card> WithdrawInvalidCards()
         {
-            disabledParticles.Play();
+            discardedParticles.Play();
+            
             var withdrawnCards = _invalidCards;
             _invalidCards = new List<Card>();
 
@@ -59,7 +55,8 @@ namespace Game.GuessingLineComponents
 
         private void PositionInvalidCard(Card card, int nbOffset)
         {
-            disabledParticles.Stop();
+            discardedParticles.Stop();
+            
             var currentCardSlotTransform = transform;
             var currentCardSlotPosition = currentCardSlotTransform.position;
             var cardTransform = card.transform;
