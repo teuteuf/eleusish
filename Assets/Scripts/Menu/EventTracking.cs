@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -13,7 +12,6 @@ namespace Menu
         private void Awake()
         {
             _gameSave = GetComponent<GameSave>();
-            AnalyticsSettings.testMode = true;
         }
 
         public void TrackChangeScene(AvailableScene scene)
