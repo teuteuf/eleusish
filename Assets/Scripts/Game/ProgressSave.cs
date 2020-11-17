@@ -21,8 +21,18 @@ namespace Game
             if (File.Exists(Application.persistentDataPath + saveFileName))
             {
                 var fileStream = File.Open(Application.persistentDataPath + saveFileName, FileMode.Open);
-                _progress = (Progress)_binaryFormatter.Deserialize(fileStream);
-                fileStream.Close();
+                try
+                {
+                    _progress = (Progress)_binaryFormatter.Deserialize(fileStream);
+                }
+                catch (Exception e)
+                {
+                    _progress = new Progress();
+                }
+                finally
+                {
+                    fileStream.Close();
+                }
             }
             else
             {
