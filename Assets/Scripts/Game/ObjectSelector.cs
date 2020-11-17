@@ -1,6 +1,7 @@
 ﻿using Game.CardComponents;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game
 {
@@ -30,6 +31,11 @@ namespace Game
 
         private void Update()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            
             if (Input.GetMouseButtonDown(0))
             {
                 _timeClickDown = Time.time;
