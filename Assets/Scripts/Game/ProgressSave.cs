@@ -25,7 +25,7 @@ namespace Game
                 {
                     _progress = (Progress)_binaryFormatter.Deserialize(fileStream);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     _progress = new Progress();
                 }
