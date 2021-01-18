@@ -16,7 +16,7 @@ namespace Game
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation,
                     (Quaternion) _targetRotation,
-                    Time.deltaTime * rotationSpeed
+                    TimeManager.instance.GetDeltaTime() * rotationSpeed
                 );
 
                 if (transform.rotation == _targetRotation)

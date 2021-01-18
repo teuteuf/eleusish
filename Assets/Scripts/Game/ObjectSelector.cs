@@ -31,7 +31,7 @@ namespace Game
 
         private void Update()
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.IsPointerOverGameObject() || TimeManager.instance.state == TimeManager.TimeState.PAUSE)
             {
                 return;
             }

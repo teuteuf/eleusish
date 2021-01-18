@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game;
+using UnityEngine;
 
 namespace Menu.Screens
 {
@@ -9,6 +10,7 @@ namespace Menu.Screens
         public void TogglePause()
         {
             pauseLayer.SetActive(!pauseLayer.activeSelf);
+            TimeManager.instance.TogglePause();
         }
     }
 }

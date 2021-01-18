@@ -23,7 +23,7 @@ namespace Game
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 (Vector3) _targetPosition,
-                Time.deltaTime * _actualMoveSpeed
+                TimeManager.instance.GetDeltaTime() * _actualMoveSpeed
             );
 
             _onMove?.Invoke();
