@@ -34,10 +34,13 @@ namespace Game.GuessingLineComponents
 
         public List<Card> WithdrawInvalidCards()
         {
-            discardedParticles.Play();
-            
             var withdrawnCards = _invalidCards;
-            _invalidCards = new List<Card>();
+
+            if (_invalidCards.Count > 0)
+            {
+                discardedParticles.Play();
+                _invalidCards = new List<Card>();
+            }
 
             return withdrawnCards;
         }
