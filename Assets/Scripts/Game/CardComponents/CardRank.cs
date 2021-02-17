@@ -11,7 +11,7 @@ namespace Game.CardComponents
         Five,
         Six,
         Seven,
-        Height,
+        Eight,
         Nine,
         Ten,
         Jack,
@@ -39,7 +39,7 @@ namespace Game.CardComponents
                     return "6";
                 case CardRank.Seven:
                     return "7";
-                case CardRank.Height:
+                case CardRank.Eight:
                     return "8";
                 case CardRank.Nine:
                     return "9";
