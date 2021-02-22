@@ -1,7 +1,7 @@
 ﻿using Game;
 using UnityEngine;
 
-namespace Menu.Screens
+namespace Menu.Screens.GameScreen
 {
     public class GameScreen : MonoBehaviour
     {

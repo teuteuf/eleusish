@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Game.CardComponents;
 using JetBrains.Annotations;
+using Menu.Screens.GameScreen;
 using UnityEngine;
 
 namespace Game
@@ -9,6 +10,7 @@ namespace Game
     public class Hand : MonoBehaviour
     {
         [SerializeField] private CardsOrganizer cardsOrganizer = default;
+        [SerializeField] private HandCardsCounter handCardsCounter = default;
 
         private readonly List<Card> _cards = new List<Card>();
 
@@ -19,12 +21,16 @@ namespace Game
             card.transform.parent = transform;
             _cards.Add(card);
             cardsOrganizer.Organize(_cards);
+            
+            handCardsCounter.UpdateCardCounter(_cards.Count);
         }
 
         public void RemoveCard([NotNull] Card card)
         {
             _cards.Remove(card);
             cardsOrganizer.Organize(_cards);
+            
+            handCardsCounter.UpdateCardCounter(_cards.Count);
         }
 
         public void DragHand(Vector3 offset)

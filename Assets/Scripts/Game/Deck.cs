@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Game.CardComponents;
 using JetBrains.Annotations;
+using Menu.Screens.GameScreen;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,6 +13,7 @@ namespace Game
     public class Deck : MonoBehaviour
     {
         [SerializeField] private Card prefabCard = default;
+        [SerializeField] private RemainingCardsCounter remainingCardsCounter = default;
 
         [SerializeField] private int nbCardsDuplicate = 2;
 
@@ -30,7 +32,7 @@ namespace Game
             if (_remainingCards.Count == 0)
             {
                 return null;
-            }
+            }            
 
             return PickCardAtIndex(0);
         }
@@ -56,6 +58,8 @@ namespace Game
             var deckTransform = transform;
             var card = Instantiate(prefabCard, deckTransform.position, deckTransform.rotation);
             card.SetValue(cardValue);
+            
+            remainingCardsCounter.UpdateCardCounter(_remainingCards.Count);
 
             return card;
         }
@@ -82,6 +86,8 @@ namespace Game
                 _remainingCards.Add(allCards[cardIndex]);
                 allCards.RemoveAt(cardIndex);
             }
+            
+            remainingCardsCounter.UpdateCardCounter(_remainingCards.Count);
         }
     }
 }

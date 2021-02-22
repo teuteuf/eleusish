@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   discardedParticles: {fileID: 3311771459045098040}
-  spaceBetweenInvalidCards: 0.1
+  spaceBetweenInvalidCards: 0.05
   spaceBetweenInvalidAndValidCards: {x: -0.3625, y: 0.95}
   randomRotationAngle: 2
 --- !u!1001 &3892759956741300638
@@ -55,6 +55,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6403691403945081041}
     m_Modifications:
+    - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,6 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.7071068
       objectReference: {fileID: 0}
@@ -83,16 +93,6 @@ PrefabInstance:
     - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 468671047974178024, guid: d82c47cd15526d446908665f8342abf0,
